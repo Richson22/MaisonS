@@ -1,35 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Product Gallery</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Maison S — A Private Culinary & Creative Atelier</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+
+  
+</style>
 </head>
 <body>
 
-  <!-- <button class="toggle-btn" onclick="toggleTheme()">Toggle Theme</button> -->
-  <span class="toggle-btn" onclick="toggleTheme()">🌙</span>
-  <div class="gallery">
-    <div class="card">
-      <img src="images/ronaldo.jpg" alt="">
-      <h3>Christian Ronaldo</h3>
-      <p>Footballe player.</p>
-    </div>
+ <nav>
+  <div class="logo">MAISON S<small>Private culinary atelier</small></div>
 
-    <div class="card">
-      <img src="images/3f898373451b7db3bdb963f772b948f8.jpg" alt="">
-      <h3>Lionel Messi</h3>
-      <p>Football Player.</p>
-    </div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#house">The House</a></li>
+    <li><a href="#experiences">Experiences</a></li>
+    <li><a href="#residents">Residents</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
 
-    <div class="card">
-      <img src="images/neymar.jpg" alt="">
-      <h3>Neymar Jr.</h3>
-      <p>Football Player.</p>
-    </div>
+  <div class="nav-right">
+    <a href="#contact" class="btn">Host at Maison S <span>&rarr;</span></a>
+    <a href="https://instagram.com/maison.sng" target="_blank" class="ig-link">Instagram</a>
   </div>
 
-  <script src="main.js"></script>
+  <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>
 
+ <!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-text">
+    <span class="eyebrow">A private culinary &amp; creative atelier</span>
+    <h1>A home for chefs, creators &amp; curated tables</h1>
+    <p class="lede">Where the table becomes whatever the occasion calls for.</p>
+    <div class="hero-cta"><a href="#contact" class="btn">Host at Maison S <span>&rarr;</span></a></div>
+  </div>
+  <div class="hero-image">
+    <img src="images/hero.jpg" alt="The Dining Room at Maison "  >
+    <div class="hero-fade"></div>
+  </div>
+</section>
+  <!-- ABOUT -->
+  <section class="split" id="about">
+    <div class="split-text">
+      <span class="eyebrow">About Maison S</span>
+      <h2>A house for good things to happen</h2>
+      <p>Maison S is a private culinary and creative atelier in Abuja — a home where chefs, creators, communities and brands come together through thoughtfully considered experiences.</p>
+      <p><strong>Maison S is not a restaurant.</strong> It is a place for the table to become whatever the occasion calls for — a private dinner, a brunch, a cocktail afternoon, a creative gathering, a collaboration or simply a beautiful afternoon with your people.</p>
+      <p>At the heart of Maison S is the belief that hospitality is not only about what is served, but about <strong>how a place makes people feel.</strong></p>
+    </div>
+    <div class="split-image"><img src="images/room.jpg" alt="Inside Maison S" ></div>
+  </section>
+
+  <!-- THE HOUSE -->
+  <section class="block" id="house">
+    <div class="section-head center">
+      <span class="eyebrow">The house</span>
+      <h2>Three spaces, one table</h2>
+    </div>
+
+    <div class="cards-grid">
+
+      <div class="card">
+        <div class="card-image"><img src="images/outdoor.jpg" alt="The Patio"></div>
+        <div class="card-body">
+          <h3>The Patio</h3>
+          <p>An intimate outdoor setting for cocktails, welcome receptions, brunches, creative gatherings and beautifully considered tables.</p>
+          <a href="#contact" class="btn-line">View the Patio &rarr;</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-image"><img src="images/hero.jpg" alt="The Dining Room"></div>
+        <div class="card-body">
+          <h3>The Dining Room</h3>
+          <p>An intimate dining space for private dinners, brunches, chef collaborations and shared experiences. A room designed around the table.</p>
+          <a href="#contact" class="btn-line">View the Dining Room &rarr;</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-image"><img src="images/kitchen.jpg" alt="The Kitchen"></div>
+        <div class="card-body">
+          <h3>The Kitchen</h3>
+          <p>The creative heart of Maison S. Where menus are developed, dishes are prepared, ideas are tested and every gathering begins.</p>
+          <a href="#contact" class="btn-line">View the Kitchen &rarr;</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EXPERIENCES -->
+  <section class="block" id="experiences" style="background:var(--cream-2);">
+    <div class="section-head center">
+      <span class="eyebrow">Experiences</span>
+      <h2>The canvas is yours to paint</h2>
+      <p>Bring your people. Bring your idea. Bring the occasion. Call it a brunch, a cocktail afternoon, a private dinner, a creative session or something entirely your own — we provide the space, the setting and the hospitality to bring it to life.</p>
+    </div>
+
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-body">
+          <span class="tag">Maison S &times; The Shavillah Experience &times; Priv&eacute;</span>
+          <h3>Cocktail &amp; Couture</h3>
+          <p>An intimate afternoon of cocktails, canap&eacute;s, conversation and creativity at The Patio.</p>
+          <a href="#contact" class="btn-line">Discover &rarr;</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="tag">Priv&eacute; at Maison S</span>
+          <h3>Sunday Brunch</h3>
+          <p>A beautifully hosted brunch experience bringing friends, communities and guests around the table.</p>
+          <a href="#contact" class="btn-line">Discover &rarr;</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <span class="tag">Chef collaboration series</span>
+          <h3>4 Hands, One Table</h3>
+          <p>A collaborative dining series bringing chefs together for one thoughtfully curated table.</p>
+          <a href="#contact" class="btn-line">Discover &rarr;</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HOST CTA -->
+  <section class="cta-panel">
+    <span class="eyebrow">Host at Maison S</span>
+    <h2>Your table. Your people. Your afternoon.</h2>
+    <p>Maison S welcomes private gatherings, celebrations, brand experiences, community gatherings, chef collaborations and creative projects. You bring the idea. We provide the house.</p>
+    <a href="#contact" class="btn">Host at Maison S <span>&rarr;</span></a>
+  </section>
+
+  <!-- RESIDENTS -->
+  <section class="residents" id="residents">
+    <div class="section-head center">
+      <span class="eyebrow">Residents</span>
+      <h2>The people &amp; brands that make the house</h2>
+      <p>Maison S is home to selected resident brands and creative partners whose work contributes to the life of the atelier.</p>
+    </div>
+
+    <div class="residents-grid">
+       <div class="resident-card" data-num="01">
+        <h3>Resident 01</h3>
+        <div class="resident-name">Sur Ma Table</div>
+        <div class="resident-role">Nomadic dining </br>
+        Private dinner</div>
+        <p>Sur Ma Table is Maison S' resident nomadic dining concept, creating elevated dining experiences centred around African flavours, thoughtful hospitality and the table.</p>
+        <button>Visit Sur Ma Table</button>
+      </div>
+
+      <div class="resident-card" data-num="02">
+        <h3>Resident 02</h3>
+        <div class="resident-name">Priv&eacute;</div>
+        <div class="resident-role">Priv&eacute; Sunday Brunch</br>Guided Cocktail & Canap&eacute;S Experiences</div>
+        <p>Priv&eacute; is Maison S' resident hospitality brand, curating food and beverage experiences including brunches, cocktails, canap&eacute;s and intimate hospitality.</p>
+        <button>Visit Priv&eacute;</button>
+      </div>
+
+     
+<!-- 
+      <div class="resident-card" data-num="03">
+        <h3>COLLABORATE</h3>
+        <div class="resident-name">Bring Something to the House</div>
+        <div class="resident-role">We believe the best experiences happen when different ideas meet.</div>
+        <p>If you have an experience, collaboration, creative project or gathering you'd like to bring to Maison S, we'd love to hear about it.</p>
+        <small>Chefs. Creators. Communities.</small>
+        <button>Visit Nelson Images</button>
+      </div> -->
+
+    </div>
+  </section>
+
+  <!-- COLLABORATE -->
+  <section class="collaborate">
+    <span class="eyebrow">Collaborate</span>
+    <h2>Bring something to the house</h2>
+    <p class="lede">We believe the best experiences happen when different ideas meet. If you have an experience, collaboration, creative project or gathering you'd like to bring to Maison S, we'd love to hear about it.</p>
+    <p class="roles">Chefs. Creators. Communities.</p>
+    <a href="#contact" class="btn">Collaborate with Maison S <span>&rarr;</span></a>
+  </section>
+
+  <!-- JOURNAL -->
+  <section class="journal">
+    <span class="eyebrow">Journal</span>
+    <h2>Coming soon</h2>
+    <p style="color:var(--stone); max-width:420px; margin:16px auto 0; font-size:14px; line-height:1.75;">A visual journal of life at Maison S.</p>
+    <div class="tags">
+      <span>Behind the scenes</span>
+      <span>Maison S films</span>
+      <span>Collaborations</span>
+      <span>Resident stories</span>
+      <span>Seasonal launches</span>
+      <span>Hospitality notes</span>
+      <span>Tables &amp; gatherings</span>
+      <span>Chef stories</span>
+      <span>Creative projects</span>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="contact-info">
+      <span class="eyebrow">Contact</span>
+      <h2>Come to the table</h2>
+      <p>For hosting, collaborations, private experiences or general enquiries.</p>
+      <a href="mailto:hello@maison-s.ng">hello@maison-s.ng</a>
+      <a href="https://instagram.com/maison.sng" target="_blank">@maison.sng</a>
+    </div>
+
+    <div class="contact-form">
+      <form>
+        <div class="field-row">
+          <div class="field"><label>Name</label><input type="text" placeholder="Your full name" required></div>
+          <div class="field"><label>Email</label><input type="email" placeholder="you@example.com" required></div>
+        </div>
+
+        <div class="field-row">
+          <div class="field"><label>Phone number</label><input type="tel" placeholder="+234..." required></div>
+          <div class="field"><label>Preferred date</label><input type="date"></div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Type of enquiry</label>
+            <select>
+              <option>Host an Experience</option>
+              <option>Private Dining</option>
+              <option>Brunch</option>
+              <option>Celebration</option>
+              <option>Brand / Community Gathering</option>
+              <option>Collaboration</option>
+              <option>Chef Collaboration</option>
+              <option>Creative Project</option>
+              <option>General Enquiry</option>
+            </select>
+          </div>
+          <div class="field"><label>Number of guests</label><input type="number" min="1" max="25" placeholder="e.g. 12"></div>
+        </div>
+
+        <div class="field"><label>Message</label><textarea placeholder="Tell us about your occasion"></textarea></div>
+
+        <button type="submit" class="btn" style="width:100%; justify-content:center;">Send enquiry</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+        <div class="logo">MAISON S</div>
+        <p>A private culinary and creative atelier. A home for chefs, creators &amp; curated tables.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <a href="#about">About Maison S</a>
+        <a href="#house">The House</a>
+        <a href="#experiences">Experiences</a>
+        <a href="#residents">Residents</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="mailto:hello@maison-s.ng">hello@maison-s.ng</a>
+        <a href="https://instagram.com/maison.sng" target="_blank">@maison.sng</a>
+        <a href="#contact">Collaborate</a>
+      </div>
+
+    </div>
+    <div class="copyright">&copy; 2026 Maison S. All rights reserved.</div>
+  </footer>
+<script>
+  const hamburger = document.querySelector('.hamburger');
+  const navLinks = document.querySelector('.nav-links');
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    hamburger.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', isOpen);
+  });
+
+  // close menu when a link is tapped
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', false);
+    });
+  });
+</script>
 </body>
 </html>
