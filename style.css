@@ -69,12 +69,33 @@ img{
 }
 
 h1,h2,h3{
-  font-family:'Fraunces', serif;
+  font-family:'Bodoni Moda', serif;
   font-weight:500;
   margin:0;
   line-height:1.1;
   text-transform:uppercase;
-  letter-spacing:0.01em;
+  letter-spacing:0.02em;
+}
+
+.card-bio[open] summary,
+.resident-bio[open] summary,
+.collab-bio[open] summary{
+  display:none;
+}
+
+.card-bio[open] p,
+.resident-bio[open] p,
+.collab-bio[open] p{
+  cursor:pointer;
+}
+
+@media (max-width: 860px){
+  .hero-about-bio[open] summary{
+    display:none;
+  }
+  .hero-about-bio[open] p{
+    cursor:pointer;
+  }
 }
 
 .center{ text-align:center; }
