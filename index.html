@@ -49,10 +49,12 @@
     <div class="hero-about" id="about">
       <span class="eyebrow">About Maison S</span>
       <h2>A house for good things to happen</h2>
-        <p>Maison S is a private culinary and creative atelier in Abuja</p>
-        <p> a home where chefs, creators, communities and brands come together through thoughtfully considered experiences.</p>
+      <p>Maison S is a private culinary and creative atelier in Abuja — a home where chefs, creators, communities and brands come together through thoughtfully considered experiences.</p>
+      <details class="hero-about-bio">
+        <summary>Read more</summary>
         <p><strong>Maison S is not a restaurant.</strong> It is a place for the table to become whatever the occasion calls for — a private dinner, a brunch, a cocktail afternoon, a creative gathering, a collaboration or simply a beautiful afternoon with your people.</p>
         <p>At the heart of Maison S is the belief that hospitality is not only about what is served, but about <strong>how a place makes people feel.</strong></p>
+      </details>
     </div>
   </div>
   <div class="hero-image">
@@ -97,6 +99,9 @@
       </div>
 
     </div>
+
+    <div class="scroll-dots" id="houseDots"></div>
+
   </section>
 
   <!-- EXPERIENCES -->
@@ -157,6 +162,9 @@
       </div>
 
     </div>
+
+    <div class="scroll-dots" id="experiencesDots"></div>
+
   </section>
   <!-- RESIDENTS -->
   <section class="residents" id="residents">
@@ -196,11 +204,17 @@
       <div class="collab-card">
         <span class="eyebrow">Collaborate</span>
         <h3>Bring Something to the House</h3>
-        <p>We believe the best experiences happen when different ideas meet. If you have an experience, collaboration, creative project or gathering you'd like to bring to Maison S, we'd love to hear about it.</p>
+        <details class="collab-bio">
+          <summary>Read more</summary>
+          <p>We believe the best experiences happen when different ideas meet. If you have an experience, collaboration, creative project or gathering you'd like to bring to Maison S, we'd love to hear about it.</p>
+        </details>
         <a href="#contact" class="btn">Collaborate with Maison S <span>&rarr;</span></a>
       </div>
 
     </div>
+
+    <div class="scroll-dots" id="residentsDots"></div>
+
   </section>  <footer>
     <div class="footer-grid">
 
@@ -281,6 +295,35 @@
   </div>
 
 <script>
+  function setupScrollDots(gridSelector, dotsId){
+    const grid = document.querySelector(gridSelector);
+    const dotsContainer = document.getElementById(dotsId);
+    if(!grid || !dotsContainer) return;
+
+    const cards = Array.from(grid.children);
+
+    cards.forEach((card, i) => {
+      const dot = document.createElement('button');
+      if(i === 0) dot.classList.add('active');
+      dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+      dot.addEventListener('click', () => {
+        card.scrollIntoView({ behavior:'smooth', inline:'start', block:'nearest' });
+      });
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = Array.from(dotsContainer.children);
+
+    grid.addEventListener('scroll', () => {
+      const index = Math.round(grid.scrollLeft / grid.clientWidth);
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+    });
+  }
+
+  setupScrollDots('#house .cards-grid', 'houseDots');
+  setupScrollDots('#experiences .cards-grid', 'experiencesDots');
+  setupScrollDots('.residents-grid', 'residentsDots');
+
   const hamburger = document.querySelector('.hamburger');
   const navLinks = document.querySelector('.nav-links');
 
