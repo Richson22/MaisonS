@@ -493,12 +493,10 @@ nav{
 
 .residents-grid{
   display:grid;
-  grid-template-columns:repeat(2, 1fr);
-  gap:1px;
+  grid-template-columns:repeat(3, 1fr);
+  gap:50px;
   max-width:1150px;
   margin:0 auto;
-  background:rgba(185,146,79,0.22);
-  border:1px solid rgba(185,146,79,0.22);
 }
 
 .resident-card{
