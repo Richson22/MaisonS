@@ -113,6 +113,13 @@
     letter-spacing:0.16em;
   }
 
+  .nav-logo{
+    display:block;
+    height:26px;
+    width:auto;
+    filter:invert(1) brightness(1.6);
+  }
+
   .nav-links{
     display:flex;
     gap:30px;
