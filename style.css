@@ -89,6 +89,7 @@
   .link-arrow:hover span{ transform:translateX(4px); }
 
   .scroll-dots{ display:none; }
+  .mobile-menu{ display:none; }
 
   /* ---------- NAV ---------- */
 
@@ -463,6 +464,7 @@
     nav > .btn.solid{ display:none; }
 
     .mobile-menu{
+      display:none;
       position:absolute;
       top:100%;
       left:0;
