@@ -1,4 +1,6 @@
-
+.body{
+  overflow-x:hidden;
+}
   :root{
     --cream:#f5efe4;
     --cream-2:#efe7d8;
