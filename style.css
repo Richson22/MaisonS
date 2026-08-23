@@ -976,15 +976,30 @@ footer{ background:var(--ink); color:var(--cream); padding:70px 6vw 26px; }
   .field-row{ grid-template-columns:1fr; }
 
   .footer-grid{
-    grid-template-columns:1fr;
-    gap:32px;
+    grid-template-columns:1.4fr 1fr 1fr !important;
+    gap:14px;
   }
 
   .footer-brand p{
     max-width:none;
+    font-size:12px;
   }
 
-  footer{ padding:56px 7vw 26px; }
+  .footer-col h4{
+    font-size:9.5px;
+  }
+
+  .footer-col a{
+    font-size:11px;
+    margin-bottom:8px;
+    word-break:break-word;
+  }
+
+  .logo-full{
+    height:24px;
+  }
+
+  footer{ padding:56px 5vw 26px; }
 }
 
   .footer-brand .logo{
