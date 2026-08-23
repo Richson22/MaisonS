@@ -233,6 +233,11 @@ nav{
   margin-bottom:16px;
 }
 
+.hero-about p{
+  font-family:'Fraunces', serif;
+  font-style:italic;
+}
+
 .hero-text h1{ font-size:clamp(30px,3.4vw,46px); }
 
 .hero-text .lede{
@@ -873,6 +878,10 @@ footer{ background:var(--ink); color:var(--cream); padding:70px 6vw 26px; }
     letter-spacing:-0.01em;
   }
 
+  .hero-about h2{
+    font-size:13px;
+  }
+
   .hero-about{
     border-top:1px solid rgba(255,255,255,0.25);
     padding-top:32px;
@@ -1266,7 +1275,7 @@ body.modal-open{ overflow:hidden; }
     cursor:pointer;
     position:relative;
     padding:6px 12px !important;
-    border-radius:16px;
+    border-radius:5px;
     display:flex;
     flex-direction:column;
     align-items:flex-start;
