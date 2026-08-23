@@ -16,7 +16,12 @@
 <body>
 
  <nav>
-  <div class="logo">MAISON S<small>Private culinary atelier</small></div>
+      <div class="logo">
+    <div class="logo-top">
+      MAISON <img src="images/maison-s-symbol.png" alt="S" class="logo-symbol">
+    </div>
+    <small>Private culinary atelier</small>
+  </div>
 
   <ul class="nav-links">
     <li><a href="#home">Home</a></li>
@@ -219,7 +224,9 @@
     <div class="footer-grid">
 
       <div class="footer-brand">
-        <div class="logo">MAISON S</div>
+         <div class="logo">
+          MAISON <img src="images/maison-s-symbol.png" alt="S" class="logo-symbol">
+        </div>
         <p>A private culinary and creative atelier. A home for chefs, creators &amp; curated tables.</p>
       </div>
 
@@ -294,6 +301,14 @@
     </div>
   </div>
 
+  <!-- RESIDENT DETAIL MODAL (mobile) -->
+  <div class="modal-overlay" id="residentModal">
+    <div class="modal-box">
+      <button class="modal-close" aria-label="Close" id="residentModalClose">&times;</button>
+      <div id="residentModalContent"></div>
+    </div>
+  </div>
+
 <script>
   function setupScrollDots(gridSelector, dotsId){
     const grid = document.querySelector(gridSelector);
@@ -351,6 +366,42 @@
       e.preventDefault();
       heroBio.removeAttribute('open');
     }
+  });
+
+  const residentModal = document.getElementById('residentModal');
+  const residentModalContent = document.getElementById('residentModalContent');
+  const residentModalClose = document.getElementById('residentModalClose');
+
+  function openResidentModal(card){
+    residentModalContent.innerHTML = card.innerHTML;
+    residentModalContent.querySelectorAll('details').forEach(function(d){
+      d.setAttribute('open', '');
+    });
+    residentModal.classList.add('open');
+    document.body.classList.add('modal-open');
+  }
+
+  function closeResidentModal(){
+    residentModal.classList.remove('open');
+    document.body.classList.remove('modal-open');
+  }
+
+  document.querySelectorAll('.resident-card, .collab-card').forEach(function(card){
+    card.addEventListener('click', function(e){
+      if(window.innerWidth > 860) return;
+      if(e.target.closest('a, button')) return;
+      openResidentModal(card);
+    });
+  });
+
+  residentModalClose.addEventListener('click', closeResidentModal);
+
+  residentModal.addEventListener('click', function(e){
+    if(e.target === residentModal) closeResidentModal();
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeResidentModal();
   });
 
   const hamburger = document.querySelector('.hamburger');

@@ -131,6 +131,24 @@ nav{
   line-height:1;
 }
 
+.logo-top{
+  display:flex;
+  align-items:center;
+  gap:2px;
+}
+
+.logo-symbol{
+  display:inline-block;
+  height:24px;
+  width:auto;
+  transform:translateY(1px);
+}
+
+.footer-brand .logo-symbol{
+  height:26px;
+  filter:invert(1) brightness(1.6);
+}
+
 .logo small{
   display:block;
   font-family:'DM Sans', sans-serif;
@@ -486,6 +504,13 @@ nav{
 /* ---------- RESIDENTS (dark) ---------- */
 .residents{ background:var(--cream-2); padding:100px 0; }
 
+@media (max-width: 860px){
+  .residents{
+    background:transparent;
+    padding:60px 0;
+  }
+}
+
 .residents .section-head h2{ color:var(--ink); }
 .residents .section-head p{ color:var(--stone); }
 .residents .eyebrow{ color:var(--clay); }
@@ -497,6 +522,12 @@ nav{
   gap:50px;
   max-width:1150px;
   margin:0 auto;
+}
+
+@media (max-width: 860px){
+  .residents-grid{
+    margin-top:-24px;
+  }
 }
 
 .resident-card{
@@ -859,9 +890,10 @@ footer{ background:var(--ink); color:var(--cream); padding:70px 6vw 26px; }
     overflow-x:auto;
     scroll-snap-type:x mandatory;
     -webkit-overflow-scrolling:touch;
-    gap:16px;
-    padding:0 7vw 8px;
+    gap:0;
+    padding:0;
     max-width:100%;
+    scroll-padding:0;
   }
 
   #house .cards-grid .card,
@@ -914,16 +946,12 @@ footer{ background:var(--ink); color:var(--cream); padding:70px 6vw 26px; }
     transform:scale(1.2);
   }
 }
-   .residents-grid{
-    flex-direction:row;
-    overflow-x:auto;
-    scroll-snap-type:x mandatory;
-    -webkit-overflow-scrolling:touch;
-    gap:16px;
-    padding:0 7vw 8px;
+  .residents-grid{
+    flex-direction:column;
+    overflow:visible;
+    gap:10px;
+    padding:0 7vw;
     max-width:100%;
-    background:none;
-    border:none;
   }
 
   .residents-group{
@@ -942,8 +970,23 @@ footer{ background:var(--ink); color:var(--cream); padding:70px 6vw 26px; }
     scroll-snap-align:start;
   }
   .field-row{ grid-template-columns:1fr; }
-  .footer-grid{ grid-template-columns:1fr; }
+
+  .footer-grid{
+    grid-template-columns:1fr;
+    gap:32px;
+  }
+
+  .footer-brand p{
+    max-width:none;
+  }
+
+  footer{ padding:56px 7vw 26px; }
 }
+
+  .footer-brand .logo{
+    white-space:nowrap;
+    font-size:20px;
+  }
 
 .resident-bio{
   width:100%;
@@ -1208,4 +1251,156 @@ body.modal-open{ overflow:hidden; }
 .collab-card .btn:hover{
   background:var(--ivory);
   color:var(--dark-2);
+}
+
+@media (max-width: 860px){
+
+  .residents-grid{
+    flex-direction:row;
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    gap:8px;
+    -webkit-overflow-scrolling:touch;
+    background:none;
+    border:none;
+    padding:0 7vw;
+  }
+
+  .resident-card,
+  .collab-card{
+    cursor:pointer;
+    position:relative;
+    padding:6px 12px !important;
+    border-radius:16px;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:0;
+    flex:0 0 auto;
+    width:auto;
+    overflow:visible;
+    background:var(--dark-2);
+    border:none;
+    margin-right:2px;
+  }
+
+  .resident-card .resident-name{
+    font-family:'DM Sans', sans-serif;
+    font-style:normal;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:0.04em;
+    line-height:1.3;
+    margin:0;
+    white-space:nowrap;
+  }
+
+  .collab-card .eyebrow{
+    margin:0;
+    font-size:11px;
+  }
+
+  .collab-card .eyebrow::after{
+    display:none;
+  }
+
+  .resident-card::before{
+    display:none;
+  }
+
+  .resident-card h3,
+  .resident-card .resident-role,
+  .resident-card .resident-bio,
+  .resident-card button,
+  .collab-card h3,
+  .collab-card .collab-bio,
+  .collab-card .btn{
+    display:none;
+  }
+
+  .resident-card .resident-name{
+    font-family:'DM Sans', sans-serif;
+    font-style:normal;
+    font-size:10.5px;
+    font-weight:600;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    margin:0;
+  }
+
+  .collab-card .eyebrow{
+    margin:0;
+  }
+
+  .resident-card::after,
+  .collab-card::after{
+    content:"Tap to see details";
+    font-size:8px;
+    font-weight:500;
+    letter-spacing:0.04em;
+    text-transform:none;
+    color:rgba(239,230,211,0.5);
+    white-space:nowrap;
+  }
+
+  #residentsDots{
+    display:none;
+  }
+
+  #residentModalContent h3,
+  #residentModalContent .eyebrow,
+  #residentModalContent .resident-role,
+  #residentModalContent .resident-bio,
+  #residentModalContent button,
+  #residentModalContent .collab-bio{
+    display:block;
+  }
+
+  #residentModalContent .resident-bio summary,
+  #residentModalContent .collab-bio summary{
+    display:none;
+  }
+
+  #residentModalContent .resident-bio p,
+  #residentModalContent .collab-bio p{
+    color:var(--stone);
+    font-size:14px;
+    line-height:1.7;
+    margin:0 0 16px;
+  }
+
+  #residentModalContent .resident-role{
+    color:var(--clay);
+  }
+
+  #residentModalContent button{
+    all:unset;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-top:12px;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ink);
+    border-bottom:1px solid var(--ink);
+    padding-bottom:4px;
+    cursor:pointer;
+    width:fit-content;
+  }
+
+  #residentModalContent .btn{
+    display:inline-flex;
+  }
+
+  #residentModalContent .resident-name{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:clamp(22px,2vw,27px);
+  }
+
+  #residentModalContent details{
+    display:block;
+  }
 }
