@@ -1,6 +1,4 @@
-.body{
-  overflow-x:hidden;
-}
+
   :root{
     --cream:#f5efe4;
     --cream-2:#efe7d8;
@@ -15,6 +13,7 @@
 
   *{ box-sizing:border-box; }
   html{ scroll-behavior:smooth; }
+  html, body{ overflow-x:hidden; }
 
   body{
     margin:0;
@@ -525,8 +524,10 @@
       display:flex;
       grid-template-columns:none;
       overflow-x:auto;
+      overflow-y:hidden;
       scroll-snap-type:x mandatory;
       -webkit-overflow-scrolling:touch;
+      touch-action:pan-x;
       gap:0;
       margin:0 -7vw;
       padding:0;
