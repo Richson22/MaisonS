@@ -61,12 +61,7 @@ img{
   margin-top: 50px;
 }
 
-.eyebrow::after{
-  content:"";
-  width:26px;
-  height:1px;
-  background:var(--clay);
-}
+
 
 h1,h2,h3{
   font-family:'Bodoni Moda', serif;
@@ -124,30 +119,20 @@ nav{
 }
 
 .logo{
-  font-family:'Fraunces', serif;
-  font-size:22px;
-  font-weight:600;
-  letter-spacing:0.06em;
   line-height:1;
 }
 
-.logo-top{
-  display:flex;
-  align-items:center;
-  gap:2px;
-}
-
-.logo-symbol{
-  display:inline-block;
-  height:24px;
+.logo-full{
+  display:block;
+  height:32px;
   width:auto;
-  transform:translateY(1px);
 }
 
-.footer-brand .logo-symbol{
-  height:26px;
+.footer-brand .logo-full{
+  height:34px;
   filter:invert(1) brightness(1.6);
 }
+
 
 .logo small{
   display:block;
@@ -877,6 +862,12 @@ footer{ background:var(--ink); color:var(--cream); padding:70px 6vw 26px; }
   }
 
   .hero-text .lede{ color:rgba(255,255,255,0.85); }
+
+  .hero-text h1{
+    font-size:13px;
+    white-space:nowrap;
+    letter-spacing:-0.01em;
+  }
 
   .hero-about{
     border-top:1px solid rgba(255,255,255,0.25);
