@@ -1334,6 +1334,7 @@ body.modal-open{ overflow:hidden; }
 
   .collab-card .eyebrow{
     margin:0;
+    color:var(--ivory);
   }
 
   .resident-card::after,
