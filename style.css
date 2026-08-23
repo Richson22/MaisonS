@@ -1,5 +1,6 @@
 html, body{
   overflow-x: hidden;
+  background:var(--ink);
 }
 :root{
   --cream:#f4efe6;
