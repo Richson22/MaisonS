@@ -6,313 +6,278 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,600;1,6..96,500&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<style>
-
-  
-</style>
 </head>
 <body>
+  <!-- HERO / NAV -->
+  <section class="hero" id="home">
+    <div class="hero-bg"><img src="images/hero-main.jpg" alt="The Dining Room at Maison S"></div>
 
- <nav>
-      <div class="logo">
-    <img src="images/maison-s-logo.png" alt="Maison S — The Culinary Atelier" class="logo-full">
-  </div>
+    <nav>
+      <div class="logo">MAISON S</div>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experiences">Experiences</a></li>
+        <li><a href="#residents">Residents</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button onclick="openBooking()" class="btn solid">Host at Maison S</button>
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
 
-  <ul class="nav-links">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#house">The House</a></li>
-    <li><a href="#experiences">Experiences</a></li>
-    <li><a href="#residents">Residents</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="#about">About</a>
+        <a href="#experiences">Experiences</a>
+        <a href="#residents">Residents</a>
+        <a href="#contact">Contact</a>
+        <button onclick="openBooking()" class="btn solid">Host at Maison S</button>
+      </div>
+    </nav>
 
-  <div class="nav-right">
-    <a href="#contact" class="btn">Host at Maison S <span>&rarr;</span></a>
-    <a href="https://instagram.com/maison.sng" target="_blank" class="ig-link">Instagram</a>
-  </div>
-
-  <button class="hamburger" aria-label="Open menu" aria-expanded="false">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-</nav>
-
- <!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-text">
-    <span class="eyebrow">A private culinary &amp; creative atelier</span>
-    <h1>A home for chefs, creators &amp; curated tables</h1>
-    <p class="lede">Where the table becomes whatever the occasion calls for.</p>
-    <div class="hero-cta"><a href="#contact" class="btn">Host at Maison S <span>&rarr;</span></a></div>
-
-    <div class="hero-about" id="about">
-      <span class="eyebrow">About Maison S</span>
-      <h2>A house for good things to happen</h2>
-      <p>Maison S is a private culinary and creative atelier in Abuja — a home where chefs, creators, communities and brands come together through thoughtfully considered experiences.</p>
-      <details class="hero-about-bio">
-        <summary>Read more</summary>
-        <p><strong>Maison S is not a restaurant.</strong> It is a place for the table to become whatever the occasion calls for — a private dinner, a brunch, a cocktail afternoon, a creative gathering, a collaboration or simply a beautiful afternoon with your people.</p>
-        <p>At the heart of Maison S is the belief that hospitality is not only about what is served, but about <strong>how a place makes people feel.</strong></p>
-      </details>
+    <div class="hero-content">
+      <h1>Maison S</h1>
+      <p class="hero-sub">A private culinary &amp; creative atelier</p>
+      <div class="hero-rule"></div>
+      <p class="hero-lede">Where the table becomes whatever the occasion calls for.</p>
+      <div class="hero-actions">
+        <button onclick="openBooking()" class="btn">Host at Maison S</button>
+        <a href="https://instagram.com/maison.sng" target="_blank" class="link-arrow">Instagram <span>&rarr;</span></a>
+      </div>
     </div>
-  </div>
-  <div class="hero-image">
-    <img src="images/hero.jpg" alt="The Dining Room at Maison "  >
-    <div class="hero-fade"></div>
-  </div>
-</section>
+  </section>
+
   <!-- THE HOUSE -->
-  <section class="block" id="house">
-    <div class="section-head1 center">
-      <span class="eyebrow1">The house</span>
-      <h2>Three spaces, one table</h2>
+  <section class="split-section" id="about">
+    <div class="container">
+      <div class="split-grid">
+
+        <div class="split-info">
+          <span class="eyebrow">The house</span>
+          <h2>Not a restaurant.</h2>
+          <p class="split-tagline">A home for chefs, creators &amp; curated tables.</p>
+          <p class="stone-text">Maison S is a private culinary and creative atelier in Abuja — a place for the table to become whatever the occasion calls for, from an intimate dinner to a creative gathering.</p>
+          <a href="#house" class="link-arrow">Discover the house <span>&rarr;</span></a>
+        </div>
+
+        <div class="image-grid" id="house">
+
+          <div class="image-card">
+            <div class="image-card-photo"><img src="images/house-patio.jpg" alt="The Patio"></div>
+            <h3>The Patio</h3>
+            <p class="caption-desc">An intimate outdoor setting for cocktails, welcome receptions, brunches and beautifully considered tables.</p>
+          </div>
+
+          <div class="image-card">
+            <div class="image-card-photo"><img src="images/house-dining-room.jpg" alt="The Dining Room"></div>
+            <h3>The Dining Room</h3>
+            <p class="caption-desc">An intimate dining space for private dinners, brunches and chef collaborations. A room designed around the table.</p>
+          </div>
+
+          <div class="image-card">
+            <div class="image-card-photo"><img src="images/house-kitchen.jpg" alt="The Kitchen"></div>
+            <h3>The Kitchen</h3>
+            <p class="caption-desc">The creative heart of Maison S — where menus are developed and every gathering begins.</p>
+          </div>
+
+        </div>
+
+        <div class="scroll-dots" id="houseDots"></div>
+
+      </div>
     </div>
-
-    <div class="cards-grid">
-
-      <div class="card">
-        <div class="card-image"><img src="images/outdoor.jpg" alt="The Patio"></div>
-        <div class="card-body">
-          <h3>The Patio</h3>
-          <p>An intimate outdoor setting for cocktails, welcome receptions, brunches, creative gatherings and beautifully considered tables.</p>
-          <a href="#contact" class="btn-line">View the Patio &rarr;</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-image"><img src="images/hero.jpg" alt="The Dining Room"></div>
-        <div class="card-body">
-          <h3>The Dining Room</h3>
-          <p>An intimate dining space for private dinners, brunches, chef collaborations and shared experiences. A room designed around the table.</p>
-          <a href="#contact" class="btn-line">View the Dining Room &rarr;</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-image"><img src="images/kitchen.jpg" alt="The Kitchen"></div>
-        <div class="card-body">
-          <h3>The Kitchen</h3>
-          <p>The creative heart of Maison S. Where menus are developed, dishes are prepared, ideas are tested and every gathering begins.</p>
-          <a href="#contact" class="btn-line">View the Kitchen &rarr;</a>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="scroll-dots" id="houseDots"></div>
-
   </section>
 
   <!-- EXPERIENCES -->
-  <section class="block" id="experiences" style="background:var(--cream-2);">
-    <div class="section-head center">
-      <span class="eyebrow">Experiences</span>
-      <h2>The canvas is yours to paint</h2>
-      <p>Bring your people. Bring your idea. Bring the occasion. Call it a brunch, a cocktail afternoon, a private dinner, a creative session or something entirely your own — we provide the space, the setting and the hospitality to bring it to life.</p>
+  <section class="split-section dark" id="experiences">
+    <div class="container">
+      <div class="split-grid">
+
+        <div class="split-info">
+          <span class="eyebrow">Experiences</span>
+          <h2>The canvas is yours to paint.</h2>
+          <p class="stone-text">Bring your people, your idea, your occasion. We provide the space, the setting and the hospitality to bring it to life.</p>
+          <a href="#contact" class="link-arrow">Host at Maison S <span>&rarr;</span></a>
+        </div>
+
+        <div class="image-grid" id="experiencesGrid">
+
+          <div class="image-card">
+            <div class="image-card-photo"><img src="images/exp-cocktail-couture.jpg" alt="Cocktail & Couture"></div>            <h3>Cocktail &amp; Couture</h3>
+            <p class="caption-desc">Maison S &times; The Shavillah Experience &times; Priv&eacute; — cocktails, canap&eacute;s and creativity at The Patio.</p>
+          </div>
+
+          <div class="image-card">
+            <div class="image-card-photo"><img src="images/exp-sunday-brunch.jpg" alt="Sunday Brunch"></div>
+            <h3>Sunday Brunch</h3>
+            <p class="caption-desc">Priv&eacute; at Maison S — a beautifully hosted brunch bringing friends and communities around the table.</p>
+          </div>
+
+          <div class="image-card">
+            <div class="image-card-photo"><img src="images/exp-4-hands-one-table.jpg" alt="4 Hands, One Table"></div>
+            <h3>4 Hands, One Table</h3>
+            <p class="caption-desc">A collaborative dining series bringing chefs together for one thoughtfully curated table.</p>
+          </div>
+        </div>
+
+        <div class="scroll-dots" id="experiencesDots"></div>
+
+      </div>
     </div>
-
-    <div class="cards-grid">
-      <div class="card">
-        <div class="card-body">
-          <span class="tag">Maison S &times; The Shavillah Experience &times; Priv&eacute;</span>
-          <h3>Cocktail &amp; Couture</h3>
-          <details class="card-bio">
-            <summary>Read more</summary>
-            <p>An intimate afternoon of cocktails, canap&eacute;s, conversation and creativity at The Patio.</p>
-          </details>
-          <a href="#contact" class="btn-line">Discover &rarr;</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-body">
-          <span class="tag">Priv&eacute; at Maison S</span>
-          <h3>Sunday Brunch</h3>
-          <details class="card-bio">
-            <summary>Read more</summary>
-            <p>A beautifully hosted brunch experience bringing friends, communities and guests around the table.</p>
-          </details>
-          <a href="#contact" class="btn-line">Discover &rarr;</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-body">
-          <span class="tag">Chef collaboration series</span>
-          <h3>4 Hands, One Table</h3>
-          <details class="card-bio">
-            <summary>Read more</summary>
-            <p>A collaborative dining series bringing chefs together for one thoughtfully curated table.</p>
-          </details>
-          <a href="#contact" class="btn-line">Discover &rarr;</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-body">
-          <span class="tag">Host at Maison S</span>
-          <h3>Your Table. Your People. Your Afternoon.</h3>
-          <details class="card-bio">
-            <summary>Read more</summary>
-            <p>Maison S welcomes private gatherings, celebrations, brand experiences, community gatherings, chef collaborations and creative projects. You bring the idea. We provide the house.</p>
-          </details>
-          <a href="#contact" class="btn-line">Host at Maison S &rarr;</a>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="scroll-dots" id="experiencesDots"></div>
-
   </section>
+
   <!-- RESIDENTS -->
-  <section class="residents" id="residents">
-    <div class="section-head center">
-      <span class="eyebrow">Residents</span>
-      <h2>The people &amp; brands that make the house</h2>
-      <p>Maison S is home to selected resident brands and creative partners whose work contributes to the life of the atelier.</p>
-    </div>
+  <section class="split-section" id="residents">
+    <div class="container">
+      <div class="split-grid">
 
-    <div class="residents-grid">
-
-      <div class="residents-group">
-        <div class="resident-card" data-num="01">
-          <h3>Resident 01</h3>
-          <div class="resident-name">Sur Ma Table</div>
-          <div class="resident-role">Nomadic dining <br>
-          Private dinner</div>
-          <details class="resident-bio">
-            <summary>Read more</summary>
-            <p>Sur Ma Table is Maison S' resident nomadic dining concept, creating elevated dining experiences centred around African flavours, thoughtful hospitality and the table.</p>
-          </details>
-          <button>Visit Sur Ma Table</button>
+        <div class="split-info">
+          <span class="eyebrow">Residents</span>
+          <h2>The people &amp; brands that make the house.</h2>
+          <p class="stone-text">Maison S is home to selected resident brands and creative partners whose work contributes to the life of the atelier.</p>
         </div>
 
-        <div class="resident-card" data-num="02">
-          <h3>Resident 02</h3>
-          <div class="resident-name">Priv&eacute;</div>
-          <div class="resident-role">Priv&eacute; Sunday Brunch<br>Guided Cocktail &amp; Canap&eacute;s Experiences</div>
-          <details class="resident-bio">
-            <summary>Read more</summary>
-            <p>Priv&eacute; is Maison S' resident hospitality brand, curating food and beverage experiences including brunches, cocktails, canap&eacute;s and intimate hospitality.</p>
-          </details>
-          <button>Visit Priv&eacute;</button>
+        <div class="image-grid" id="residentsGrid">
+
+          <div class="image-card">
+            <div class="image-card-photo"><img src="images/resident-prive.jpg" alt="Priv&eacute;"></div>            <h3>Priv&eacute;</h3>
+            <p class="caption-desc">Hospitality</p>
+            <a href="#contact" class="link-arrow">Visit Priv&eacute; <span>&rarr;</span></a>
+          </div>
+
+          <div class="image-card">
+            <div class="image-card-photo"><img src="images/resident-sur-ma-table.jpg" alt="Sur Ma Table"></div>
+            <h3>Sur Ma Table</h3>
+            <p class="caption-desc">Nomadic dining</p>
+            <a href="#contact" class="link-arrow">Visit Sur Ma Table <span>&rarr;</span></a>
+          </div>
+
+          <div class="image-card">
+            <div class="image-card-photo"><img src="images/resident-nelson-images.jpg" alt="Nelson Images"></div>
+            <h3>Nelson Images</h3>
+            <p class="caption-desc">Media &amp; visual storytelling</p>
+            <a href="#contact" class="link-arrow">Visit Nelson Images <span>&rarr;</span></a>
+          </div>
         </div>
-      </div>
 
-      <div class="collab-card">
-        <span class="eyebrow">Collaborate</span>
-        <h3>Bring Something to the House</h3>
-        <details class="collab-bio">
-          <summary>Read more</summary>
-          <p>We believe the best experiences happen when different ideas meet. If you have an experience, collaboration, creative project or gathering you'd like to bring to Maison S, we'd love to hear about it.</p>
-        </details>
-        <a href="#contact" class="btn">Collaborate with Maison S <span>&rarr;</span></a>
       </div>
-
     </div>
+  </section>
 
-    <div class="scroll-dots" id="residentsDots"></div>
+  <!-- CTA -->
+  <section class="cta" id="contact">
+    <div class="cta-bg"><img src="images/cta-table.jpg" alt="Come to the table"></div>
+    <div class="cta-content">
+      <h2>Come to the table.</h2>
+      <p>Have an idea for Maison S? For hosting, collaborations, private experiences or general enquiries.</p>
+      <button onclick="openBooking()" class="btn solid">Host at Maison S</button>
+    </div>
+  </section>
 
-  </section>  <footer>
-    <div class="footer-grid">
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-row">
+      <div class="logo">MAISON S</div>
 
-      <div class="footer-brand">
-         <div class="logo">
-          <img src="images/maison-s-logo.png" alt="Maison S — The Culinary Atelier" class="logo-full">
+      <div class="footer-info">
+        <div>
+          <a href="mailto:hello@maison-s.ng">hello@maison-s.ng</a><br>
+          <a href="https://instagram.com/maison.sng" target="_blank">@maison.sng</a>
         </div>
-        <p>A private culinary and creative atelier. A home for chefs, creators &amp; curated tables.</p>
+        <div>3 Yaana Street,<br>Katampe, Abuja</div>
       </div>
 
-      <div class="footer-col">
-        <h4>Explore</h4>
-        <a href="#about">About Maison S</a>
-        <a href="#house">The House</a>
-        <a href="#experiences">Experiences</a>
-        <a href="#residents">Residents</a>
-      </div>
-
-  
-      <div class="footer-col">
-        <h4>Connect</h4>
-        <a href="mailto:hello@maison-s.ng">hello@maison-s.ng</a>
-        <a href="https://instagram.com/maison.sng" target="_blank">@maison.sng</a>
-        <a href="#contact">Collaborate</a>
-      </div>
-
-      <div class="footer-col footer-journal">
-        <h4>Journal</h4>
-        <p class="footer-soon">Coming soon</p>
-        <p class="footer-journal-lede">A visual journal of life at Maison S.</p>
-      </div>
-
+      <a href="https://instagram.com/maison.sng" target="_blank" class="link-arrow">Instagram <span>&rarr;</span></a>
     </div>
-    <div class="copyright">&copy; 2026 Maison S. All rights reserved.</div>
   </footer>
 
-  <!-- HOST MODAL -->
-  <div class="modal-overlay" id="hostModal">
+  <!-- BOOKING MODAL -->
+  <div class="modal" id="bookingModal">
     <div class="modal-box">
-      <button class="modal-close" aria-label="Close">&times;</button>
 
-      <span class="eyebrow">Come to the table</span>
-      <h2>Host at Maison S</h2>
-      <p class="modal-lede">For hosting, collaborations, private experiences or general enquiries.</p>
+      <button class="close" onclick="closeBooking()">&times;</button>
 
-      <form>
-        <div class="field-row">
-          <div class="field"><label>Name</label><input type="text" placeholder="Your full name" required></div>
-          <div class="field"><label>Email</label><input type="email" placeholder="you@example.com" required></div>
+      <h2>Book Your Experience</h2>
+      <p>Fill in your details to request a booking</p>
+
+      <form onsubmit="submitBooking(event)">
+
+        <div class="form-group">
+          <label>Booking Type</label>
+          <select id="selectedEvent" required>
+            <option>Host an Experience</option>
+            <option>Private Dining</option>
+            <option>Brunch</option>
+            <option>Celebration</option>
+            <option>Brand / Community Gathering</option>
+            <option>Collaboration</option>
+            <option>Chef Collaboration</option>
+            <option>Creative Project</option>
+            <option>General Booking</option>
+          </select>
         </div>
 
-        <div class="field-row">
-          <div class="field"><label>Phone number</label><input type="tel" placeholder="+234..." required></div>
-          <div class="field"><label>Preferred date</label><input type="date"></div>
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="guestName" placeholder="Your full name" required>
         </div>
 
-        <div class="field-row">
-          <div class="field">
-            <label>Type of enquiry</label>
-            <select>
-              <option>Host an Experience</option>
-              <option>Private Dining</option>
-              <option>Brunch</option>
-              <option>Celebration</option>
-              <option>Brand / Community Gathering</option>
-              <option>Collaboration</option>
-              <option>Chef Collaboration</option>
-              <option>Creative Project</option>
-              <option>General Enquiry</option>
-            </select>
-          </div>
-          <div class="field"><label>Number of guests</label><input type="number" min="1" max="25" placeholder="e.g. 12"></div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="guestEmail" placeholder="you@example.com" required>
         </div>
 
-        <div class="field"><label>Message</label><textarea placeholder="Tell us about your occasion"></textarea></div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" id="guestPhone" placeholder="+234..." required>
+        </div>
 
-        <button type="submit" class="btn" style="width:100%; justify-content:center;">Send enquiry</button>
+        <div class="form-group">
+          <label>Number of Guests</label>
+          <input type="number" id="guestCount" min="1" max="25" value="1" required>
+        </div>
+
+        <div class="form-group">
+          <label>Preferred Date</label>
+          <input type="date" id="modalDate" required>
+        </div>
+
+        <p class="form-hint">Maison S hosts Fridays, Saturdays &amp; Sundays only.</p>
+
+        <button class="btn solid submit" type="submit" id="submitBookingBtn">Request Booking</button>
+
       </form>
-    </div>
-  </div>
 
-  <!-- RESIDENT DETAIL MODAL (mobile) -->
-  <div class="modal-overlay" id="residentModal">
-    <div class="modal-box">
-      <button class="modal-close" aria-label="Close" id="residentModalClose">&times;</button>
-      <div id="residentModalContent"></div>
     </div>
   </div>
 
 <script>
+  function openBooking() {
+    document.getElementById('bookingModal').classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeBooking() {
+    document.getElementById('bookingModal').classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('bookingModal').addEventListener('click', function(e){
+    if (e.target === this) closeBooking();
+  });
+
+  function submitBooking(e) {
+    e.preventDefault();
+    closeBooking();
+    e.target.reset();
+    alert("Thanks — we'll be in touch shortly.");
+  }
+
   function setupScrollDots(gridSelector, dotsId){
     const grid = document.querySelector(gridSelector);
     const dotsContainer = document.getElementById(dotsId);
     if(!grid || !dotsContainer) return;
 
-    const cards = Array.from(grid.children);
+    const cards = Array.from(grid.children).filter(el => el.classList.contains('image-card'));
 
     cards.forEach((card, i) => {
       const dot = document.createElement('button');
@@ -332,118 +297,26 @@
     });
   }
 
-  setupScrollDots('#house .cards-grid', 'houseDots');
-  setupScrollDots('#experiences .cards-grid', 'experiencesDots');
-  setupScrollDots('.residents-grid', 'residentsDots');
-
-  document.querySelectorAll('.card-bio, .resident-bio, .collab-bio').forEach(function(details){
-    details.addEventListener('click', function(e){
-      if(details.hasAttribute('open')){
-        e.preventDefault();
-        details.removeAttribute('open');
-      }
-    });
-  });
-
-  const heroBio = document.querySelector('.hero-about-bio');
-
-  function syncHeroBio(){
-    if (window.innerWidth > 860) {
-      heroBio.setAttribute('open', '');
-    } else {
-      heroBio.removeAttribute('open');
-    }
-  }
-
-  syncHeroBio();
-  window.addEventListener('resize', syncHeroBio);
-
-  heroBio.addEventListener('click', function(e){
-    if(window.innerWidth <= 860 && heroBio.hasAttribute('open')){
-      e.preventDefault();
-      heroBio.removeAttribute('open');
-    }
-  });
-
-  const residentModal = document.getElementById('residentModal');
-  const residentModalContent = document.getElementById('residentModalContent');
-  const residentModalClose = document.getElementById('residentModalClose');
-
-  function openResidentModal(card){
-    residentModalContent.innerHTML = card.innerHTML;
-    residentModalContent.querySelectorAll('details').forEach(function(d){
-      d.setAttribute('open', '');
-    });
-    residentModal.classList.add('open');
-    document.body.classList.add('modal-open');
-  }
-
-  function closeResidentModal(){
-    residentModal.classList.remove('open');
-    document.body.classList.remove('modal-open');
-  }
-
-  document.querySelectorAll('.resident-card, .collab-card').forEach(function(card){
-    card.addEventListener('click', function(e){
-      if(window.innerWidth > 860) return;
-      if(e.target.closest('a, button')) return;
-      openResidentModal(card);
-    });
-  });
-
-  residentModalClose.addEventListener('click', closeResidentModal);
-
-  residentModal.addEventListener('click', function(e){
-    if(e.target === residentModal) closeResidentModal();
-  });
-
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape') closeResidentModal();
-  });
+  setupScrollDots('#house.image-grid', 'houseDots');
+  setupScrollDots('#experiencesGrid', 'experiencesDots');
 
   const hamburger = document.querySelector('.hamburger');
-  const navLinks = document.querySelector('.nav-links');
+  const mobileMenu = document.getElementById('mobileMenu');
 
   hamburger.addEventListener('click', () => {
-    const isOpen = navLinks.classList.toggle('open');
+    const isOpen = mobileMenu.classList.toggle('open');
     hamburger.classList.toggle('open');
     hamburger.setAttribute('aria-expanded', isOpen);
   });
 
-  // close menu when a link is tapped
-  navLinks.querySelectorAll('a').forEach(link => {
+  mobileMenu.querySelectorAll('a, button').forEach(link => {
     link.addEventListener('click', () => {
-      navLinks.classList.remove('open');
+      mobileMenu.classList.remove('open');
       hamburger.classList.remove('open');
       hamburger.setAttribute('aria-expanded', false);
     });
   });
-
-  const modal = document.getElementById('hostModal');
-  const modalClose = document.querySelector('.modal-close');
-  const modalTriggers = document.querySelectorAll('a[href="#contact"]');
-
-  function openModal(e){
-    e.preventDefault();
-    modal.classList.add('open');
-    document.body.classList.add('modal-open');
-  }
-
-  function closeModal(){
-    modal.classList.remove('open');
-    document.body.classList.remove('modal-open');
-  }
-
-  modalTriggers.forEach(trigger => trigger.addEventListener('click', openModal));
-  modalClose.addEventListener('click', closeModal);
-
-  modal.addEventListener('click', (e) => {
-    if(e.target === modal) closeModal();
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape') closeModal();
-  });
 </script>
+
 </body>
 </html>
