@@ -307,6 +307,7 @@
     font-size:clamp(26px,2.6vw,34px);
     text-transform:uppercase;
     margin-bottom:14px;
+    margin-top: 10px;
   }
 
   .split-tagline{
