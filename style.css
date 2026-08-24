@@ -227,6 +227,13 @@
     letter-spacing:0.03em;
   }
 
+  .hero-logo{
+  width:auto;
+  height:clamp(50px, 8vw, 90px);
+  filter:invert(1) brightness(1.6);
+  margin-bottom:6px;
+}
+
   .hero-sub{
     font-size:15px;
     letter-spacing:0.02em;
