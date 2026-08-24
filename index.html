@@ -285,8 +285,11 @@
     document.body.style.overflow = '';
   }
 
-  document.getElementById('aboutModal').addEventListener('click', function(e){
-    if (e.target === this) closeAbout();
+  window.addEventListener('load', () => {
+    if (!sessionStorage.getItem('aboutShown')) {
+      openAbout();
+      sessionStorage.setItem('aboutShown', 'true');
+    }
   });
 
   document.getElementById('bookingModal').addEventListener('click', function(e){
