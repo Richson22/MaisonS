@@ -40,6 +40,7 @@
     text-transform:uppercase;
     letter-spacing:0.01em;
     line-height:1.05;
+    color:var(--rust);
   }
 
   #residents .split-info h2{
@@ -75,6 +76,8 @@
     text-transform:uppercase;
     letter-spacing:0.01em;
     line-height:1.05;
+    margin-left:-4px;
+    color:var(--rust);
   }
 
   #about .split-info h2{
@@ -259,10 +262,7 @@
   }
 
   .hero-rule{
-    width:36px;
-    height:1px;
-    background:var(--rust);
-    margin-bottom:20px;
+    display:none;
   }
 
   .hero-lede{
@@ -353,7 +353,15 @@
     margin:0 0 10px;
   }
 
-  .image-card .link-arrow{ font-size:10.5px; }
+  .image-card{
+    display:flex;
+    flex-direction:column;
+  }
+
+  .image-card .link-arrow{
+    font-size:10.5px;
+    margin-top:auto;
+  }
 
   /* ---------- CTA ---------- */
 
