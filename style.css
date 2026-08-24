@@ -68,6 +68,23 @@
     font-weight:600;
   }
 
+    #about .eyebrow{
+    font-weight:800;
+    font-size:clamp(26px,2.6vw,34px);
+    font-family:'Fraunces', serif;
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+    line-height:1.05;
+  }
+
+  #about .split-info h2{
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    font-family:'DM Sans', sans-serif;
+    font-weight:600;
+  }
+
   .container{
     max-width:1240px;
     margin:0 auto;
@@ -420,11 +437,21 @@
 
   .modal-box h2{
     font-family:'Fraunces', serif;
-    font-size:28px;
+    font-size:15px;
     margin-bottom:6px;
     color:var(--ink);
     text-transform:uppercase;
   }
+
+  .about-modal-eyebrow{
+  text-transform:uppercase;
+  font-weight:800;
+}
+
+.about-modal-h2{
+  font-size:clamp(10px, 2.2vw, 28px);
+  white-space:nowrap;
+}
 
   .modal-box > form > p,
   .modal-box > p{
@@ -627,7 +654,8 @@
     }
 
     #residents .split-info h2,
-    #experiences .split-info h2{
+    #experiences .split-info h2,
+    #about .split-info h2{
       font-size:12px;
       white-space:normal;
     }
@@ -642,3 +670,69 @@
       gap:14px;
     }
   }
+
+  .lightbox{
+  position:fixed;
+  inset:0;
+  background:rgba(15,13,11,0.95);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:2000;
+  padding:40px;
+}
+
+.lightbox.show{ display:flex; }
+
+.lightbox-img{
+  max-width:85vw;
+  max-height:80vh;
+  width:auto;
+  height:auto;
+  object-fit:contain;
+}
+
+.lightbox-caption{
+  position:absolute;
+  bottom:30px;
+  left:0;
+  right:0;
+  text-align:center;
+  color:var(--white);
+  font-size:13px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+}
+
+.lightbox-close{
+  position:absolute;
+  top:20px;
+  right:24px;
+  background:none;
+  border:none;
+  color:var(--white);
+  font-size:32px;
+  cursor:pointer;
+}
+
+.lightbox-nav{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:none;
+  border:none;
+  color:var(--white);
+  font-size:28px;
+  cursor:pointer;
+  padding:10px;
+}
+
+.lightbox-prev{ left:16px; }
+.lightbox-next{ right:16px; }
+
+.image-card-photo{ cursor:pointer; }
+
+@media (max-width: 900px){
+  .lightbox{ padding:20px; }
+  .lightbox-nav{ font-size:22px; }
+}
