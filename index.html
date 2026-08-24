@@ -17,7 +17,7 @@
     <nav>
       <img src="images/maison-s-logo.png" alt="Maison S — The Culinary Atelier" class="nav-logo">
       <ul class="nav-links">
-        <li><a href="#about">About</a></li>
+        <li><a href="#" onclick="openAbout(); return false;">About</a></li>
         <li><a href="#experiences">Experiences</a></li>
         <li><a href="#residents">Residents</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -26,7 +26,7 @@
       <button class="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
 
       <div class="mobile-menu" id="mobileMenu">
-        <a href="#about">About</a>
+        <a href="#" onclick="openAbout(); return false;">About</a>
         <a href="#experiences">Experiences</a>
         <a href="#residents">Residents</a>
         <a href="#contact">Contact</a>
@@ -250,6 +250,21 @@
     </div>
   </div>
 
+  <!-- ABOUT MODAL -->
+  <div class="modal" id="aboutModal">
+    <div class="modal-box">
+      <button class="close" onclick="closeAbout()">&times;</button>
+
+      <span class="eyebrow">About Maison S</span>
+      <h2>A House for Good Things to Happen</h2>
+      <p>Maison S is a private culinary and creative atelier in Abuja.</p>
+      <p>A home where chefs, creators, communities and brands come together through thoughtfully considered experiences.</p>
+      <p><strong>Maison S is not a restaurant.</strong></p>
+      <p>It is a place for the table to become whatever the occasion calls for — a private dinner, a brunch, a cocktail afternoon, a creative gathering, a collaboration or simply a beautiful afternoon with your people.</p>
+      <p>At the heart of Maison S is the belief that hospitality is not only about what is served, but about <strong>how a place makes people feel.</strong></p>
+    </div>
+  </div>
+
 <script>
   function openBooking() {
     document.getElementById('bookingModal').classList.add('show');
@@ -260,6 +275,20 @@
     document.getElementById('bookingModal').classList.remove('show');
     document.body.style.overflow = '';
   }
+
+    function openAbout() {
+    document.getElementById('aboutModal').classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeAbout() {
+    document.getElementById('aboutModal').classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('aboutModal').addEventListener('click', function(e){
+    if (e.target === this) closeAbout();
+  });
 
   document.getElementById('bookingModal').addEventListener('click', function(e){
     if (e.target === this) closeBooking();

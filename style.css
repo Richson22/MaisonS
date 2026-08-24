@@ -33,13 +33,39 @@
 
   a{ color:inherit; }
 
-  .eyebrow{
-    font-size:12px;
-    font-weight:600;
-    letter-spacing:0.14em;
+    #residents .eyebrow{
+    font-weight:800;
+    font-size:clamp(26px,2.6vw,34px);
+    font-family:'Fraunces', serif;
     text-transform:uppercase;
-    color:var(--rust);
-    margin:0 0 10px;
+    letter-spacing:0.01em;
+    line-height:1.05;
+  }
+
+  #residents .split-info h2{
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    font-family:'DM Sans', sans-serif;
+    font-weight:600;
+  }
+
+    #experiences .eyebrow{
+    font-weight:800;
+    font-size:clamp(26px,2.6vw,34px);
+    font-family:'Fraunces', serif;
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+    line-height:1.05;
+    color:rgba(253,250,243,0.85);
+  }
+
+  #experiences .split-info h2{
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    font-family:'DM Sans', sans-serif;
+    font-weight:600;
   }
 
   .container{
@@ -218,9 +244,10 @@
   .hero-lede{
     font-family:'Fraunces', serif;
     font-style:italic;
-    font-size:15px;
+    font-size:clamp(10px, 3.5vw, 15px);
     color:rgba(253,250,243,0.8);
     margin:0 0 30px;
+    white-space:nowrap;
   }
 
   .hero-actions{
@@ -332,9 +359,10 @@
   }
 
   .cta h2{
-    font-size:clamp(34px,4vw,50px);
+    font-size:clamp(24px,6vw,50px);
     text-transform:uppercase;
     margin-bottom:14px;
+    white-space:nowrap;
   }
 
   .cta p{
@@ -587,8 +615,14 @@
 
     .split-info h2{
       font-size:18px;
-      white-space:nowrap;
+      white-space:normal;
       letter-spacing:0.005em;
+    }
+
+    #residents .split-info h2,
+    #experiences .split-info h2{
+      font-size:12px;
+      white-space:normal;
     }
 
     .footer-row{
