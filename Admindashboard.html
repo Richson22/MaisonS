@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maison S - Admin Dashboard</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap"
+  rel="stylesheet"
+>
+
+<style>
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: "DM Sans", sans-serif;
+    background: #f7f7f5;
+    color: #171717;
+  }
+
+  a { text-decoration: none; color: inherit; }
+  button, input, select, textarea { font-family: inherit; }
+
+  /* =========================
+     LOGIN GATE
+  ========================= */
+
+  .gate {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #111;
+    padding: 20px;
+  }
+
+  .gate-box {
+    background: #fff;
+    width: 100%;
+    max-width: 380px;
+    padding: 34px 30px;
+    border-radius: 12px;
+    text-align: center;
+  }
+
+  .gate-box .brand {
+    font-family: "Playfair Display", serif;
+    font-size: 24px;
+    margin-bottom: 4px;
+  }
+
+  .gate-box .brand span { color: #d8ad5b; }
+
+  .gate-box p.sub {
+    color: #888;
+    font-size: 12.5px;
+    margin-bottom: 22px;
+  }
+
+  .gate-box input {
+    width: 100%;
+    padding: 12px 13px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    outline: none;
+    margin-bottom: 12px;
+    font-size: 14px;
+  }
+
+  .gate-box input:focus { border-color: #d8ad5b; }
+
+  .gate-box button {
+    width: 100%;
+    border: none;
+    background: #151515;
+    color: #fff;
+    padding: 12px;
+    border-radius: 7px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .gate-box button:hover { background: #333; }
+
+  .gate-note {
+    margin-top: 16px;
+    font-size: 10.5px;
+    color: #b3261e;
+    line-height: 1.5;
+    text-align: left;
+    background: #fdecec;
+    padding: 10px 12px;
+    border-radius: 7px;
+  }
+
+  .gate-error {
+    color: #b3261e;
+    font-size: 12px;
+    margin: -6px 0 12px;
+    display: none;
+  }
+
+  .gate-error.show { display: block; }
+
+  /* =========================
+     APP SHELL
+  ========================= */
+
+  .app { display: none; min-height: 100vh; }
+  .app.show { display: block; }
+
+  header.topbar {
+    background: #111;
+    color: #fff;
+    padding: 16px 0;
+  }
+
+  .topbar-inner {
+    width: 92%;
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .brandmark {
+    font-family: "Playfair Display", serif;
+    font-size: 20px;
+  }
+
+  .brandmark span { color: #d8ad5b; }
+
+  .brandmark small {
+    display: block;
+    font-family: "DM Sans", sans-serif;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #999;
+    margin-top: 2px;
+  }
+
+  .topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .topbar-actions a,
+  .topbar-actions button {
+    font-size: 12.5px;
+    color: #ccc;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .topbar-actions a:hover,
+  .topbar-actions button:hover { color: #d8ad5b; }
+
+  .logout-btn {
+    border: 1px solid rgba(255,255,255,.25) !important;
+    padding: 8px 14px;
+    border-radius: 6px;
+    color: #fff !important;
+  }
+
+  .logout-btn:hover { border-color: #d8ad5b !important; }
+
+  main {
+    width: 92%;
+    max-width: 1200px;
+    margin: 28px auto 60px;
+  }
+
+  /* Tabs */
+
+  .tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #e3e2dd;
+  }
+
+  .tab-btn {
+    border: none;
+    background: none;
+    padding: 12px 16px;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #888;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+  }
+
+  .tab-btn.active {
+    color: #171717;
+    border-bottom-color: #d8ad5b;
+  }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* Stats */
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 26px;
+  }
+
+  .stat-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 18px;
+  }
+
+  .stat-card .num {
+    font-family: "Playfair Display", serif;
+    font-size: 30px;
+  }
+
+  .stat-card .label {
+    color: #888;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    margin-top: 4px;
+  }
+
+  /* Card / panel */
+
+  .panel {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 22px;
+  }
+
+  .panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .panel-head h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 20px;
+  }
+
+  .filter-group {
+    display: flex;
+    gap: 6px;
+  }
+
+  .filter-btn {
+    border: 1px solid #ddd;
+    background: #fff;
+    padding: 7px 13px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #666;
+    cursor: pointer;
+  }
+
+  .filter-btn.active {
+    background: #151515;
+    color: #fff;
+    border-color: #151515;
+  }
+
+  /* Table */
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  thead th {
+    text-align: left;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: #999;
+    padding: 10px 8px;
+    border-bottom: 1px solid #eee;
+  }
+
+  tbody td {
+    padding: 12px 8px;
+    border-bottom: 1px solid #f2f2f2;
+    vertical-align: middle;
+  }
+
+  tbody tr:hover { background: #fafaf8; }
+
+  .badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .badge.pending { background: #fff4da; color: #8a6300; }
+  .badge.confirmed { background: #eaf7ee; color: #1c7c3e; }
+  .badge.declined { background: #fdecec; color: #b3261e; }
+
+  .row-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  .mini-btn {
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .mini-btn.confirm { background: #1c7c3e; color: #fff; }
+  .mini-btn.decline { background: #b3261e; color: #fff; }
+  .mini-btn.view { background: #f1f1ee; color: #333; }
+  .mini-btn.delete { background: #f1f1ee; color: #b3261e; }
+  .mini-btn:hover { opacity: .85; }
+
+  .empty-state {
+    text-align: center;
+    padding: 50px 20px;
+    color: #999;
+    font-size: 13px;
+  }
+
+  /* Spaces tab layout */
+
+  .spaces-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+
+  .space-card {
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+
+  .space-card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .space-card-head h3 { font-size: 15px; }
+
+  .space-card-head .cap {
+    font-size: 11px;
+    color: #b78c37;
+    font-weight: 700;
+  }
+
+  .space-card p.desc {
+    color: #888;
+    font-size: 12px;
+    margin: 8px 0 10px;
+    line-height: 1.5;
+  }
+
+  .space-card-actions { display: flex; gap: 6px; }
+
+  .form-group { margin-bottom: 12px; }
+
+  .form-group label {
+    display: block;
+    font-size: 11.5px;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 10px 11px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    outline: none;
+    font-size: 13px;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: #d8ad5b; }
+
+  .form-row { display: grid; grid-template-columns: 2fr 1fr; gap: 10px; }
+
+  .btn-primary {
+    border: none;
+    background: #151515;
+    color: #fff;
+    padding: 11px 16px;
+    border-radius: 7px;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover { background: #333; }
+
+  .btn-gold {
+    border: none;
+    background: #d8ad5b;
+    color: #111;
+    padding: 11px 16px;
+    border-radius: 7px;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+  }
+
+  .btn-gold:hover { background: #edc978; }
+
+  hr.divider { border: none; border-top: 1px solid #eee; margin: 20px 0; }
+
+  .avail-status {
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    margin: 12px 0;
+    display: none;
+  }
+
+  .avail-status.show { display: block; }
+  .avail-status.ok { background: #eaf7ee; color: #1c7c3e; }
+  .avail-status.blocked { background: #fdecec; color: #b3261e; }
+
+  .block-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #f2f2f2;
+    font-size: 12.5px;
+  }
+
+  .block-list-item:last-child { border-bottom: none; }
+
+  /* Modal (booking detail) */
+
+  .modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+  }
+
+  .modal.show { display: flex; }
+
+  .modal-box {
+    width: 100%;
+    max-width: 440px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 26px;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .modal-box .close {
+    position: absolute;
+    right: 14px;
+    top: 12px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 50%;
+    background: #f1f1f1;
+    cursor: pointer;
+    font-size: 18px;
+  }
+
+  .modal-box h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 22px;
+    margin-bottom: 14px;
+  }
+
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 9px 0;
+    border-bottom: 1px solid #f2f2f2;
+    font-size: 13px;
+  }
+
+  .detail-row span:first-child { color: #888; }
+  .detail-row span:last-child { font-weight: 600; text-align: right; }
+
+  /* Toast */
+
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #151515;
+    color: #fff;
+    padding: 13px 18px;
+    border-radius: 7px;
+    font-size: 13px;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: .3s;
+    z-index: 2000;
+    max-width: 300px;
+  }
+
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  @media (max-width: 800px) {
+    .stats { grid-template-columns: 1fr 1fr; }
+    .spaces-layout { grid-template-columns: 1fr; }
+    table { display: block; overflow-x: auto; white-space: nowrap; }
+  }
+
+</style>
+</head>
+<body>
+
+  <!-- =========================
+       LOGIN GATE
+  ========================= -->
+
+  <div class="gate" id="gate">
+
+    <div class="gate-box">
+
+      <div class="brand">MAISON <span>S</span></div>
+      <p class="sub">Admin Dashboard</p>
+
+      <form id="loginForm">
+
+        <input
+          type="password"
+          id="passcodeInput"
+          placeholder="Enter admin passcode"
+          autocomplete="off"
+        >
+
+        <p class="gate-error" id="gateError">Incorrect passcode. Try again.</p>
+
+        <button type="submit">Sign in</button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       APP
+  ========================= -->
+
+  <div class="app" id="app">
+
+    <header class="topbar">
+
+      <div class="topbar-inner">
+
+        <div class="brandmark">
+          MAISON <span>S</span>
+          <small>Admin Dashboard</small>
+        </div>
+
+        <div class="topbar-actions">
+          <a href="index.html" target="_blank">View site &#8599;</a>
+          <button class="logout-btn" onclick="logout()">Log out</button>
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <main>
+
+      <div class="tabs">
+
+        <button class="tab-btn active" data-tab="bookings" onclick="switchTab('bookings')">
+          Bookings
+        </button>
+
+        <button class="tab-btn" data-tab="spaces" onclick="switchTab('spaces')">
+          Spaces &amp; Availability
+        </button>
+
+        <button class="tab-btn" data-tab="content" onclick="switchTab('content')">
+          Site Content
+        </button>
+
+        <button class="tab-btn" data-tab="photos" onclick="switchTab('photos')">
+          Photos
+        </button>
+
+      </div>
+
+
+      <!-- ============ BOOKINGS TAB ============ -->
+
+      <div class="tab-panel active" id="tab-bookings">
+
+        <div class="stats">
+
+          <div class="stat-card">
+            <div class="num" id="statTotal">0</div>
+            <div class="label">Total Bookings</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="num" id="statPending">0</div>
+            <div class="label">Awaiting review</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="num" id="statConfirmed">0</div>
+            <div class="label">Confirmed</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="num" id="statUpcoming">0</div>
+            <div class="label">Confirmed, upcoming</div>
+          </div>
+
+        </div>
+
+
+        <div class="panel">
+
+          <div class="panel-head">
+
+            <h2>Bookings</h2>
+
+            <div class="filter-group" id="statusFilters">
+              <button class="filter-btn active" data-status="all">All</button>
+              <button class="filter-btn" data-status="pending">Pending</button>
+              <button class="filter-btn" data-status="confirmed">Confirmed</button>
+              <button class="filter-btn" data-status="declined">Declined</button>
+            </div>
+
+          </div>
+
+          <div id="bookingsTableWrap">
+            <!-- table injected by JS -->
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ============ SPACES & AVAILABILITY TAB ============ -->
+
+      <div class="tab-panel" id="tab-spaces">
+
+        <div class="spaces-layout">
+
+          <!-- Spaces management -->
+
+          <div class="panel">
+
+            <div class="panel-head">
+              <h2>Your Spaces</h2>
+            </div>
+
+            <div id="spacesList">
+              <!-- injected by JS -->
+            </div>
+
+            <hr class="divider">
+
+            <h3 style="font-size:14px;margin-bottom:12px;">Add a space</h3>
+
+            <form id="addSpaceForm">
+
+              <div class="form-group">
+                <label>Space name</label>
+                <input type="text" id="newSpaceName" placeholder="e.g. The Garden" required>
+              </div>
+
+              <div class="form-row">
+
+                <div class="form-group">
+                  <label>Description</label>
+                  <input type="text" id="newSpaceDesc" placeholder="What is this space for?">
+                </div>
+
+                <div class="form-group">
+                  <label>Capacity</label>
+                  <input type="number" id="newSpaceCapacity" min="1" max="200" value="10" required>
+                </div>
+
+              </div>
+
+              <button type="submit" class="btn-gold" style="width:100%;">
+                + Add space
+              </button>
+
+            </form>
+
+          </div>
+
+
+          <!-- Availability manager -->
+
+          <div class="panel">
+
+            <div class="panel-head">
+              <h2>Manage Availability</h2>
+            </div>
+
+            <div class="form-group">
+              <label>Space</label>
+              <select id="availSpaceSelect"></select>
+            </div>
+
+            <div class="form-group">
+              <label>Date</label>
+              <input type="date" id="availDateInput">
+            </div>
+
+            <p class="avail-status" id="availStatusBox"></p>
+
+            <button class="btn-primary" id="toggleBlockBtn" style="width:100%;">
+              Check a date first
+            </button>
+
+            <hr class="divider">
+
+            <h3 style="font-size:14px;margin-bottom:6px;">Blocked dates</h3>
+            <p style="font-size:11.5px;color:#999;margin-bottom:10px;">
+              Manually closed dates for the selected space (confirmed bookings also occupy dates automatically).
+            </p>
+
+            <div id="blockList">
+              <!-- injected by JS -->
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ============ CONTENT TAB ============ -->
+
+      <div class="tab-panel" id="tab-content">
+
+        <div class="panel">
+
+          <div class="panel-head">
+            <h2>Site Text</h2>
+            <button class="btn-gold" onclick="saveContent()">Save changes</button>
+          </div>
+
+          <p style="font-size:12px;color:#999;margin-bottom:18px;">
+            Edits appear on the live site the next time a visitor loads the page.
+          </p>
+
+          <div id="contentFieldsList">
+            <!-- injected by JS -->
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ============ PHOTOS TAB ============ -->
+
+      <div class="tab-panel" id="tab-photos">
+
+        <div class="panel">
+
+          <div class="panel-head">
+            <h2>Card Photo Galleries</h2>
+          </div>
+
+          <div class="form-group">
+            <label>Choose a card</label>
+            <select id="galleryCardSelect" onchange="renderGalleryGrid()"></select>
+          </div>
+
+          <div class="form-group">
+            <label>Upload a new photo</label>
+            <input type="file" id="galleryFileInput" accept="image/*">
+            <button class="btn-gold" style="margin-top:10px;width:100%;" onclick="handleGalleryUpload()">
+              + Upload photo
+            </button>
+          </div>
+
+          <hr class="divider">
+
+          <div id="galleryGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;">
+            <!-- injected by JS -->
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+
+  <!-- =========================
+       BOOKING DETAIL MODAL
+  ========================= -->
+
+  <div class="modal" id="detailModal">
+
+    <div class="modal-box">
+
+      <button class="close" onclick="closeDetail()">&times;</button>
+
+      <h2>Booking Details</h2>
+
+      <div id="detailBody"><!-- injected by JS --></div>
+
+      <div class="row-actions" style="margin-top:16px;" id="detailActions">
+        <!-- injected by JS -->
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="toast" id="toast"></div>
+
+
+    <script>window.MAISON_API_BASE = "https://server-ljel.onrender.com/api";</script>
+  <script src="js/db.js"></script>
+
+  <script>
+
+    // ------------------------------------------------------
+    // AUTH (placeholder — swap for real auth with the backend)
+    // ------------------------------------------------------
+
+    document.getElementById("loginForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const val = document.getElementById("passcodeInput").value;
+      const errorEl = document.getElementById("gateError");
+
+      try {
+        await MaisonDB.adminLogin(val);
+        errorEl.classList.remove("show");
+        enterApp();
+      } catch (err) {
+        errorEl.textContent = err.message || "Incorrect passcode. Try again.";
+        errorEl.classList.add("show");
+      }
+    });
+
+    function logout() {
+      MaisonDB.adminLogout();
+      document.getElementById("app").classList.remove("show");
+      document.getElementById("gate").style.display = "flex";
+      document.getElementById("passcodeInput").value = "";
+    }
+
+    function enterApp() {
+      document.getElementById("gate").style.display = "none";
+      document.getElementById("app").classList.add("show");
+      initDashboard();
+    }
+
+    if (MaisonDB.isLoggedIn()) {
+      enterApp();
+    }
+    // ------------------------------------------------------
+    // TABS
+    // ------------------------------------------------------
+
+    function switchTab(tab) {
+      document.querySelectorAll(".tab-btn").forEach((b) => {
+        b.classList.toggle("active", b.dataset.tab === tab);
+      });
+      document.querySelectorAll(".tab-panel").forEach((p) => {
+        p.classList.toggle("active", p.id === "tab-" + tab);
+      });
+      if (tab === "spaces") renderSpacesTab();
+      if (tab === "content") renderContentTab();
+      if (tab === "photos") renderPhotosTab();
+    }
+
+    // ------------------------------------------------------
+    // STATE
+    // ------------------------------------------------------
+
+    let allSpaces = [];
+    let allBookings = [];
+    let currentFilter = "all";
+    let selectedAvailSpaceId = null;
+    let currentDateStatus = null; // { blocked, blockId }
+
+    async function initDashboard() {
+      await refreshBookings();
+      await renderSpacesTab();
+
+      MaisonDB.onChange(async () => {
+        await refreshBookings();
+        await renderSpacesTab();
+      });
+    }
+
+    // ------------------------------------------------------
+    // BOOKINGS TAB
+    // ------------------------------------------------------
+
+    async function refreshBookings() {
+      allSpaces = await MaisonDB.getSpaces({ includeInactive: true });
+      allBookings = await MaisonDB.getBookings();
+      renderStats();
+      renderBookingsTable();
+    }
+
+    function spaceName(spaceId) {
+      const s = allSpaces.find((sp) => sp.id === spaceId);
+      return s ? s.name : "Any space";
+    }
+
+    function renderStats() {
+      const total = allBookings.length;
+      const pending = allBookings.filter((b) => b.status === "pending").length;
+      const confirmed = allBookings.filter((b) => b.status === "confirmed").length;
+      const today = new Date().toISOString().slice(0, 10);
+      const upcoming = allBookings.filter(
+        (b) => b.status === "confirmed" && b.date >= today
+      ).length;
+
+      document.getElementById("statTotal").textContent = total;
+      document.getElementById("statPending").textContent = pending;
+      document.getElementById("statConfirmed").textContent = confirmed;
+      document.getElementById("statUpcoming").textContent = upcoming;
+    }
+
+    document.getElementById("statusFilters").addEventListener("click", (e) => {
+      const btn = e.target.closest(".filter-btn");
+      if (!btn) return;
+      document.querySelectorAll("#statusFilters .filter-btn").forEach((b) =>
+        b.classList.remove("active")
+      );
+      btn.classList.add("active");
+      currentFilter = btn.dataset.status;
+      renderBookingsTable();
+    });
+
+    function renderBookingsTable() {
+      const wrap = document.getElementById("bookingsTableWrap");
+
+      const filtered =
+        currentFilter === "all"
+          ? allBookings
+          : allBookings.filter((b) => b.status === currentFilter);
+
+      if (filtered.length === 0) {
+        wrap.innerHTML = '<div class="empty-state">No bookings here yet.</div>';
+        return;
+      }
+
+      let rows = filtered
+        .map((b) => {
+          return `
+            <tr>
+              <td><strong>${escapeHtml(b.name || "-")}</strong><br>
+                  <span style="color:#999;font-size:11.5px;">${escapeHtml(b.email || "")}</span></td>
+              <td>${escapeHtml(b.type || "-")}</td>
+              <td>${escapeHtml(spaceName(b.spaceId))}</td>
+              <td>${b.date || "-"}</td>
+              <td>${b.guests || "-"}</td>
+              <td><span class="badge ${b.status}">${b.status}</span></td>
+              <td>
+                <div class="row-actions">
+                  <button class="mini-btn view" onclick="openDetail('${b.id}')">View</button>
+                  ${
+                    b.status === "pending"
+                      ? `<button class="mini-btn confirm" onclick="setStatus('${b.id}','confirmed')">Confirm</button>
+                         <button class="mini-btn decline" onclick="setStatus('${b.id}','declined')">Decline</button>`
+                      : ""
+                  }
+                </div>
+              </td>
+            </tr>
+          `;
+        })
+        .join("");
+
+      wrap.innerHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>Guest</th>
+              <th>Booking Type</th>
+              <th>Space</th>
+              <th>Date</th>
+              <th>Guests</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      `;
+    }
+
+    async function setStatus(id, status) {
+      await MaisonDB.updateBookingStatus(id, status);
+      await refreshBookings();
+      showToast(
+        status === "confirmed"
+          ? "Booking confirmed - that date is now occupied for this space."
+          : "Booking declined."
+      );
+      closeDetail();
+    }
+
+    function openDetail(id) {
+      const b = allBookings.find((x) => x.id === id);
+      if (!b) return;
+
+      document.getElementById("detailBody").innerHTML = `
+        <div class="detail-row"><span>Status</span><span><span class="badge ${b.status}">${b.status}</span></span></div>
+        <div class="detail-row"><span>Booking Type</span><span>${escapeHtml(b.type)}</span></div>
+        <div class="detail-row"><span>Space</span><span>${escapeHtml(spaceName(b.spaceId))}</span></div>
+        <div class="detail-row"><span>Name</span><span>${escapeHtml(b.name)}</span></div>
+        <div class="detail-row"><span>Email</span><span>${escapeHtml(b.email)}</span></div>
+        <div class="detail-row"><span>Phone</span><span>${escapeHtml(b.phone)}</span></div>
+        <div class="detail-row"><span>Guests</span><span>${b.guests}</span></div>
+        <div class="detail-row"><span>Date</span><span>${b.date}</span></div>
+        <div class="detail-row"><span>Submitted</span><span>${new Date(b.createdAt).toLocaleString()}</span></div>
+      `;
+
+      let actions = "";
+      if (b.status === "pending") {
+        actions = `
+          <button class="mini-btn confirm" onclick="setStatus('${b.id}','confirmed')">Confirm booking</button>
+          <button class="mini-btn decline" onclick="setStatus('${b.id}','declined')">Decline</button>
+        `;
+      }
+      actions += `<button class="mini-btn delete" onclick="removeBooking('${b.id}')">Delete</button>`;
+
+      document.getElementById("detailActions").innerHTML = actions;
+
+      document.getElementById("detailModal").classList.add("show");
+    }
+
+    function closeDetail() {
+      document.getElementById("detailModal").classList.remove("show");
+    }
+
+    document.getElementById("detailModal").addEventListener("click", function (e) {
+      if (e.target === this) closeDetail();
+    });
+
+    async function removeBooking(id) {
+      await MaisonDB.deleteBooking(id);
+      await refreshBookings();
+      closeDetail();
+      showToast("Booking deleted.");
+    }
+
+    // ------------------------------------------------------
+    // SPACES & AVAILABILITY TAB
+    // ------------------------------------------------------
+
+    async function renderSpacesTab() {
+      const spaces = await MaisonDB.getSpaces({ includeInactive: true });
+      allSpaces = spaces;
+
+      renderSpacesList(spaces);
+      renderAvailSpaceSelect(spaces);
+    }
+
+    function renderSpacesList(spaces) {
+      const el = document.getElementById("spacesList");
+
+      if (spaces.length === 0) {
+        el.innerHTML = '<div class="empty-state">No spaces yet - add one below.</div>';
+        return;
+      }
+
+      el.innerHTML = spaces
+        .map(
+          (s) => `
+        <div class="space-card">
+          <div class="space-card-head">
+            <div>
+              <h3>${escapeHtml(s.name)}</h3>
+              <div class="cap">Up to ${s.capacity} guests</div>
+            </div>
+          </div>
+          <p class="desc">${escapeHtml(s.description || "No description yet.")}</p>
+          <div class="space-card-actions">
+            <button class="mini-btn view" onclick="editSpace('${s.id}')">Edit</button>
+            <button class="mini-btn delete" onclick="deleteSpaceConfirm('${s.id}')">Delete</button>
+          </div>
+        </div>
+      `
+        )
+        .join("");
+    }
+
+    async function editSpace(id) {
+      const space = allSpaces.find((s) => s.id === id);
+      if (!space) return;
+
+      const name = prompt("Space name:", space.name);
+      if (name === null) return;
+
+      const description = prompt("Description:", space.description || "");
+      if (description === null) return;
+
+      const capacity = prompt("Capacity:", space.capacity);
+      if (capacity === null) return;
+
+      await MaisonDB.updateSpace(id, {
+        name: name.trim() || space.name,
+        description: description.trim(),
+        capacity: Number(capacity) || space.capacity
+      });
+
+      await renderSpacesTab();
+      showToast("Space updated.");
+    }
+
+    async function deleteSpaceConfirm(id) {
+      const space = allSpaces.find((s) => s.id === id);
+      if (!space) return;
+
+      if (!confirm(`Delete "${space.name}"? This also clears its blocked dates.`)) return;
+
+      await MaisonDB.deleteSpace(id);
+      await renderSpacesTab();
+      showToast("Space deleted.");
+    }
+
+    document.getElementById("addSpaceForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById("newSpaceName").value.trim();
+      const description = document.getElementById("newSpaceDesc").value.trim();
+      const capacity = document.getElementById("newSpaceCapacity").value;
+
+      if (!name) return;
+
+      await MaisonDB.addSpace({ name, description, capacity });
+
+      e.target.reset();
+      document.getElementById("newSpaceCapacity").value = 10;
+
+      await renderSpacesTab();
+      showToast("Space added.");
+    });
+
+    // --- Availability manager ---
+
+    function renderAvailSpaceSelect(spaces) {
+      const select = document.getElementById("availSpaceSelect");
+      const prevValue = select.value;
+
+      select.innerHTML = spaces
+        .map((s) => `<option value="${s.id}">${escapeHtml(s.name)}</option>`)
+        .join("");
+
+      if (spaces.some((s) => s.id === prevValue)) {
+        select.value = prevValue;
+      }
+
+      selectedAvailSpaceId = select.value || (spaces[0] && spaces[0].id) || null;
+
+      if (selectedAvailSpaceId) renderBlockList(selectedAvailSpaceId);
+    }
+
+    document.getElementById("availSpaceSelect").addEventListener("change", (e) => {
+      selectedAvailSpaceId = e.target.value;
+      resetAvailStatus();
+      renderBlockList(selectedAvailSpaceId);
+    });
+
+    document.getElementById("availDateInput").addEventListener("change", checkAvailDate);
+
+    function resetAvailStatus() {
+      currentDateStatus = null;
+      const box = document.getElementById("availStatusBox");
+      box.className = "avail-status";
+      box.textContent = "";
+      const btn = document.getElementById("toggleBlockBtn");
+      btn.textContent = "Check a date first";
+      btn.onclick = null;
+    }
+
+    async function checkAvailDate() {
+      const dateInput = document.getElementById("availDateInput");
+      const box = document.getElementById("availStatusBox");
+      const btn = document.getElementById("toggleBlockBtn");
+
+      if (!dateInput.value || !selectedAvailSpaceId) {
+        resetAvailStatus();
+        return;
+      }
+
+      const blocks = await MaisonDB.getBlocks();
+      const bookings = await MaisonDB.getBookings();
+
+      const block = blocks.find(
+        (b) => b.spaceId === selectedAvailSpaceId && b.date === dateInput.value
+      );
+
+      const confirmedBooking = bookings.find(
+        (b) =>
+          b.spaceId === selectedAvailSpaceId &&
+          b.date === dateInput.value &&
+          b.status === "confirmed"
+      );
+
+      box.classList.add("show");
+
+      if (confirmedBooking) {
+        box.className = "avail-status blocked show";
+        box.textContent = "Occupied by a confirmed booking for " + confirmedBooking.name + ". Manage it from the Bookings tab.";
+        btn.textContent = "Occupied by a confirmed booking";
+        btn.onclick = null;
+        currentDateStatus = { blocked: true, byBooking: true };
+        return;
+      }
+
+      if (block) {
+        box.className = "avail-status blocked show";
+        box.textContent = "This date is manually blocked (" + (block.reason || "unavailable") + ").";
+        btn.textContent = "Unblock this date";
+        btn.onclick = () => unblockDate(block.id);
+        currentDateStatus = { blocked: true, blockId: block.id };
+      } else {
+        box.className = "avail-status ok show";
+        box.textContent = "This date is open for booking.";
+        btn.textContent = "Block this date";
+        btn.onclick = () => blockDate(selectedAvailSpaceId, dateInput.value);
+        currentDateStatus = { blocked: false };
+      }
+    }
+
+    async function blockDate(spaceId, date) {
+      const reason = prompt("Reason for blocking this date (optional):", "Unavailable") || "Unavailable";
+      await MaisonDB.addBlock({ spaceId, date, reason });
+      showToast("Date blocked.");
+      checkAvailDate();
+      renderBlockList(spaceId);
+    }
+
+    async function unblockDate(blockId) {
+      await MaisonDB.removeBlock(blockId);
+      showToast("Date unblocked.");
+      checkAvailDate();
+      renderBlockList(selectedAvailSpaceId);
+    }
+
+    async function renderBlockList(spaceId) {
+      const el = document.getElementById("blockList");
+      const blocks = await MaisonDB.getBlocks();
+      const relevant = blocks
+        .filter((b) => b.spaceId === spaceId)
+        .sort((a, b) => a.date.localeCompare(b.date));
+
+      if (relevant.length === 0) {
+        el.innerHTML = '<div class="empty-state" style="padding:20px 0;">No manually blocked dates for this space.</div>';
+        return;
+      }
+
+      el.innerHTML = relevant
+        .map(
+          (b) => `
+        <div class="block-list-item">
+          <span><strong>${b.date}</strong> - ${escapeHtml(b.reason || "Unavailable")}</span>
+          <button class="mini-btn delete" onclick="unblockDate('${b.id}')">Unblock</button>
+        </div>
+      `
+        )
+        .join("");
+    }
+
+    // ------------------------------------------------------
+    // SITE CONTENT TAB
+    // ------------------------------------------------------
+
+    const CONTENT_FIELDS = [
+      { key: "hero.title",        label: "Hero — Title",              type: "text" },
+      { key: "hero.sub",          label: "Hero — Subtitle",           type: "text" },
+      { key: "hero.lede",         label: "Hero — Lede line",          type: "text" },
+
+      { key: "about.eyebrow",     label: "The House — Label",         type: "text" },
+      { key: "about.heading",     label: "The House — Heading",       type: "text" },
+      { key: "about.tagline",     label: "The House — Tagline",       type: "text" },
+      { key: "about.body",        label: "The House — Body text",     type: "textarea" },
+
+      { key: "experiences.eyebrow", label: "Experiences — Label",     type: "text" },
+      { key: "experiences.heading", label: "Experiences — Heading",   type: "text" },
+      { key: "experiences.body",    label: "Experiences — Body text", type: "textarea" },
+
+      { key: "residents.eyebrow",   label: "Residents — Label",       type: "text" },
+      { key: "residents.heading",   label: "Residents — Heading",     type: "text" },
+      { key: "residents.body",      label: "Residents — Body text",   type: "textarea" },
+
+      { key: "cta.heading",       label: "CTA — Heading",             type: "text" },
+      { key: "cta.body",          label: "CTA — Body text",           type: "textarea" },
+
+      { key: "aboutModal.eyebrow", label: "About Modal — Label",       type: "text" },
+      { key: "aboutModal.heading", label: "About Modal — Heading",     type: "text" },
+      { key: "aboutModal.body",    label: "About Modal — Body (HTML ok)", type: "textarea" }
+    ];
+
+    let contentValues = {};
+
+    async function renderContentTab() {
+      contentValues = await MaisonDB.getContent();
+      const el = document.getElementById("contentFieldsList");
+
+      el.innerHTML = CONTENT_FIELDS.map((f) => {
+        const value = contentValues[f.key] || "";
+        const input = f.type === "textarea"
+          ? `<textarea data-key="${f.key}" rows="4">${escapeHtml(value)}</textarea>`
+          : `<input type="text" data-key="${f.key}" value="${escapeHtml(value)}">`;
+        return `
+          <div class="form-group">
+            <label>${f.label}</label>
+            ${input}
+          </div>
+        `;
+      }).join("");
+    }
+
+    async function saveContent() {
+      const updates = {};
+      document.querySelectorAll("#contentFieldsList [data-key]").forEach((field) => {
+        updates[field.dataset.key] = field.value;
+      });
+
+      await MaisonDB.updateContent(updates);
+      showToast("Site text updated.");
+    }
+
+    // ------------------------------------------------------
+    // PHOTOS TAB
+    // ------------------------------------------------------
+
+    const GALLERY_CARDS = [
+      { key: "house.patio",              label: "The House — The Patio" },
+      { key: "house.diningRoom",         label: "The House — The Dining Room" },
+      { key: "house.kitchen",            label: "The House — The Kitchen" },
+      { key: "experiences.cocktail",     label: "Experiences — Cocktail & Couture" },
+      { key: "experiences.brunch",       label: "Experiences — Sunday Brunch" },
+      { key: "experiences.fourHands",    label: "Experiences — 4 Hands, One Table" },
+      { key: "residents.prive",          label: "Residents — Privé" },
+      { key: "residents.surMaTable",     label: "Residents — Sur Ma Table" },
+      { key: "residents.momodu",         label: "Residents — Momodu Studios" }
+    ];
+
+    let galleryData = {};
+
+    async function renderPhotosTab() {
+      const select = document.getElementById("galleryCardSelect");
+      if (!select.dataset.filled) {
+        select.innerHTML = GALLERY_CARDS.map(c => `<option value="${c.key}">${c.label}</option>`).join("");
+        select.dataset.filled = "true";
+      }
+      galleryData = await MaisonDB.getGalleries();
+      renderGalleryGrid();
+    }
+
+    function renderGalleryGrid() {
+      const cardKey = document.getElementById("galleryCardSelect").value;
+      const images = galleryData[cardKey] || [];
+      const grid = document.getElementById("galleryGrid");
+
+      if (images.length === 0) {
+        grid.innerHTML = '<div class="empty-state">No photos yet for this card.</div>';
+        return;
+      }
+
+      grid.innerHTML = images.map(url => `
+        <div style="position:relative;">
+          <img src="${url}" style="width:100%;height:90px;object-fit:cover;border-radius:6px;">
+          <button class="mini-btn delete" style="position:absolute;top:4px;right:4px;padding:3px 7px;"
+            onclick="handleGalleryDelete('${cardKey}','${url}')">&times;</button>
+        </div>
+      `).join("");
+    }
+
+    async function handleGalleryUpload() {
+      const cardKey = document.getElementById("galleryCardSelect").value;
+      const fileInput = document.getElementById("galleryFileInput");
+      const file = fileInput.files[0];
+
+      if (!file) {
+        showToast("Choose a photo first.");
+        return;
+      }
+
+      try {
+        showToast("Uploading...");
+        const gallery = await MaisonDB.uploadGalleryImage(cardKey, file);
+        galleryData[cardKey] = gallery.images;
+        fileInput.value = "";
+        renderGalleryGrid();
+        showToast("Photo uploaded.");
+      } catch (err) {
+        showToast(err.message || "Upload failed.");
+      }
+    }
+
+    async function handleGalleryDelete(cardKey, imageUrl) {
+      if (!confirm("Remove this photo?")) return;
+      const gallery = await MaisonDB.deleteGalleryImage(cardKey, imageUrl);
+      galleryData[cardKey] = gallery.images;
+      renderGalleryGrid();
+      showToast("Photo removed.");
+    }
+
+    // ------------------------------------------------------
+    // HELPERS
+    // ------------------------------------------------------
+
+    function escapeHtml(str) {
+      if (str === undefined || str === null) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 3000);
+    }
+
+  </script>
+
+</body>
+</html>

@@ -8,6 +8,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script>window.MAISON_API_BASE = "https://server-ljel.onrender.com/api";</script>
+<script src="js/db.js"></script>
 </head>
 <body>
   <!-- HERO / NAV -->
@@ -37,8 +39,7 @@
     <div class="hero-content">
       <img src="images/maison-s-logo.png" alt="Maison S — A Private Culinary &amp; Creative Atelier" class="hero-logo">
       <div class="hero-rule"></div>
-      <p class="hero-lede">Where the table becomes whatever the occasion calls for.</p>
-      <div class="hero-actions">
+      <p class="hero-lede" data-content-key="hero.lede">Where the table becomes whatever the occasion calls for.</p>      <div class="hero-actions">
         <button onclick="openBooking()" class="btn">Host at Maison S</button>
         <a href="https://instagram.com/maison.sng" target="_blank" class="link-arrow">Instagram <span>&rarr;</span></a>
       </div>
@@ -51,17 +52,16 @@
       <div class="split-grid">
 
         <div class="split-info">
-          <span class="eyebrow">The house</span>
-          <h2>Not a restaurant.</h2>
-          <p class="split-tagline">A home for chefs, creators &amp; curated tables.</p>
-          <p class="stone-text">Maison S is a private culinary and creative atelier in Abuja — a place for the table to become whatever the occasion calls for, from an intimate dinner to a creative gathering.</p>
+          <span class="eyebrow" data-content-key="about.eyebrow">The house</span>
+          <h2 data-content-key="about.heading">Not a restaurant.</h2>
+          <p class="split-tagline" data-content-key="about.tagline">A home for chefs, creators &amp; curated tables.</p>
+          <p class="stone-text" data-content-key="about.body">Maison S is a private culinary and creative atelier in Abuja — a place for the table to become whatever the occasion calls for, from an intimate dinner to a creative gathering.</p>
           <a href="#house" class="link-arrow">Discover the house <span>&rarr;</span></a>
         </div>
-
         <div class="image-grid" id="house">
 
           <div class="image-card">
-            <div class="image-card-photo" data-gallery='["images/house-patio.jpg","images/hero-main.jpg","images/hero.jpg","images/kitchen.jpg","images/house-patio-5.jpg"]'>
+            <div class="image-card-photo" data-card-key="house.patio" data-gallery='["images/house-patio.jpg","images/hero-main.jpg","images/hero.jpg","images/kitchen.jpg","images/house-patio-5.jpg"]'>
               <img src="images/house-patio.jpg" alt="The Patio">
             </div>
             <h3>The Patio</h3>
@@ -98,9 +98,9 @@
       <div class="split-grid">
 
         <div class="split-info">
-          <span class="eyebrow">Experiences</span>
-          <h2>The canvas is yours to paint.</h2>
-          <p class="stone-text">Bring your people, your idea, your occasion. We provide the space, the setting and the hospitality to bring it to life.</p>
+          <span class="eyebrow" data-content-key="experiences.eyebrow">Experiences</span>
+          <h2 data-content-key="experiences.heading">The canvas is yours to paint.</h2>
+          <p class="stone-text" data-content-key="experiences.body">Bring your people, your idea, your occasion. We provide the space, the setting and the hospitality to bring it to life.</p>
           <a href="#contact" class="link-arrow">Host at Maison S <span>&rarr;</span></a>
         </div>
 
@@ -142,11 +142,10 @@
       <div class="split-grid">
 
         <div class="split-info">
-          <span class="eyebrow">Residents</span>
-          <h2>The people &amp; brands that make the house.</h2>
-          <p class="stone-text">Maison S is home to selected resident brands and creative partners whose work contributes to the life of the atelier.</p>
+          <span class="eyebrow" data-content-key="residents.eyebrow">Residents</span>
+          <h2 data-content-key="residents.heading">The people &amp; brands that make the house.</h2>
+          <p class="stone-text" data-content-key="residents.body">Maison S is home to selected resident brands and creative partners whose work contributes to the life of the atelier.</p>
         </div>
-
         <div class="image-grid" id="residentsGrid">
 
           <div class="image-card">
@@ -184,8 +183,8 @@
   <section class="cta" id="contact">
     <div class="cta-bg"><img src="images/cta-table.jpg" alt="Come to the table"></div>
     <div class="cta-content">
-      <h2>Come to the table.</h2>
-      <p>Have an idea for Maison S? For hosting, collaborations, private experiences or general enquiries.</p>
+      <h2 data-content-key="cta.heading">Come to the table.</h2>
+      <p data-content-key="cta.body">Have an idea for Maison S? For hosting, collaborations, private experiences or general enquiries.</p>
       <button onclick="openBooking()" class="btn solid">Host at Maison S</button>
     </div>
   </section>
@@ -233,6 +232,13 @@
         </div>
 
         <div class="form-group">
+          <label>Preferred Space</label>
+          <select id="selectedSpace" required>
+            <option value="">Loading spaces...</option>
+          </select>
+        </div>
+
+        <div class="form-group">
           <label>Full Name</label>
           <input type="text" id="guestName" placeholder="Your full name" required>
         </div>
@@ -271,14 +277,15 @@
     <div class="modal-box">
       <button class="close" onclick="closeAbout()">&times;</button>
 
-      <span class="eyebrow about-modal-eyebrow">About Maison S</span>
-      <h2 class="about-modal-h2">A House for Good Things to Happen</h2>
-      <p>Maison S is a private culinary and creative atelier in Abuja.</p>
-      <p>A home where chefs, creators, communities and brands come together through thoughtfully considered experiences.</p>
-      <p><strong>Maison S is not a restaurant.</strong></p>
-      <p>It is a place for the table to become whatever the occasion calls for — a private dinner, a brunch, a cocktail afternoon, a creative gathering, a collaboration or simply a beautiful afternoon with your people.</p>
-      <p>At the heart of Maison S is the belief that hospitality is not only about what is served, but about <strong>how a place makes people feel.</strong></p>
-    </div>
+      <span class="eyebrow about-modal-eyebrow" data-content-key="aboutModal.eyebrow">About Maison S</span>
+      <h2 class="about-modal-h2" data-content-key="aboutModal.heading">A House for Good Things to Happen</h2>
+      <div data-content-key="aboutModal.body" data-content-html="true">
+        <p>Maison S is a private culinary and creative atelier in Abuja.</p>
+        <p>A home where chefs, creators, communities and brands come together through thoughtfully considered experiences.</p>
+        <p><strong>Maison S is not a restaurant.</strong></p>
+        <p>It is a place for the table to become whatever the occasion calls for — a private dinner, a brunch, a cocktail afternoon, a creative gathering, a collaboration or simply a beautiful afternoon with your people.</p>
+        <p>At the heart of Maison S is the belief that hospitality is not only about what is served, but about <strong>how a place makes people feel.</strong></p>
+      </div>    </div>
   </div>
 
     <!-- LIGHTBOX -->
@@ -294,11 +301,24 @@
   function openBooking() {
     document.getElementById('bookingModal').classList.add('show');
     document.body.style.overflow = 'hidden';
+    populateSpaceOptions();
   }
 
   function closeBooking() {
     document.getElementById('bookingModal').classList.remove('show');
     document.body.style.overflow = '';
+  }
+
+  async function populateSpaceOptions() {
+    const select = document.getElementById('selectedSpace');
+    try {
+      const spaces = await MaisonDB.getSpaces();
+      select.innerHTML = spaces
+        .map(s => `<option value="${s.id}">${s.name} (up to ${s.capacity} guests)</option>`)
+        .join('');
+    } catch (err) {
+      select.innerHTML = '<option value="">Could not load spaces</option>';
+    }
   }
 
     function openAbout() {
@@ -319,11 +339,46 @@
     if (e.target === this) closeBooking();
   });
 
-  function submitBooking(e) {
+  async function submitBooking(e) {
     e.preventDefault();
-    closeBooking();
-    e.target.reset();
-    alert("Thanks — we'll be in touch shortly.");
+
+    const submitBtn = document.getElementById('submitBookingBtn');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+
+    const type = document.getElementById('selectedEvent').value;
+    const spaceId = document.getElementById('selectedSpace').value;
+    const name = document.getElementById('guestName').value;
+    const email = document.getElementById('guestEmail').value;
+    const phone = document.getElementById('guestPhone').value;
+    const guests = document.getElementById('guestCount').value;
+    const date = document.getElementById('modalDate').value;
+
+    if (!MaisonDB.isHostableDay(date)) {
+      alert('Maison S hosts Fridays, Saturdays & Sundays only. Please choose one of those days.');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Request Booking';
+      return;
+    }
+
+    try {
+      const available = await MaisonDB.isSpaceAvailable(spaceId, date);
+      if (!available) {
+        alert('That space is no longer available on that date. Please choose another date or space.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Request Booking';
+        return;
+      }
+
+      await MaisonDB.addBooking({ type, name, email, phone, guests, date, spaceId });      closeBooking();
+      e.target.reset();
+      alert("Thanks — we'll be in touch shortly.");
+    } catch (err) {
+      alert('Something went wrong: ' + err.message);
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Request Booking';
+    }
   }
 
   function setupScrollDots(gridSelector, dotsId){
@@ -428,7 +483,43 @@
       hamburger.setAttribute('aria-expanded', false);
     });
   });
-</script>
 
+  async function loadSiteContent() {
+    try {
+      const content = await MaisonDB.getContent();
+      document.querySelectorAll("[data-content-key]").forEach((el) => {
+        const key = el.dataset.contentKey;
+        if (content[key] !== undefined && content[key] !== "") {
+          if (el.dataset.contentHtml === "true") {
+            el.innerHTML = content[key];
+          } else {
+            el.textContent = content[key];
+          }
+        }
+      });
+    } catch (err) {
+      console.warn("Could not load site content:", err.message);
+    }
+  }
+
+  async function loadGalleries() {
+    try {
+      const galleries = await MaisonDB.getGalleries();
+      document.querySelectorAll("[data-card-key]").forEach((el) => {
+        const key = el.dataset.cardKey;
+        const images = galleries[key];
+        if (images && images.length > 0) {
+          el.dataset.gallery = JSON.stringify(images);
+          el.querySelector("img").src = images[0];
+        }
+      });
+    } catch (err) {
+      console.warn("Could not load galleries:", err.message);
+    }
+  }
+
+  loadSiteContent();
+  loadGalleries();
+</script>
 </body>
 </html>
