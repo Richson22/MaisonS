@@ -203,6 +203,12 @@
       body: JSON.stringify({ status })
     });
   }
+    function sendBookingMessage(id, subject, message) {
+    return apiFetch("/bookings/" + encodeURIComponent(id) + "/message", {
+      method: "POST",
+      body: JSON.stringify({ subject, message })
+    });
+  }
 
   async function deleteBooking(id) {
     await apiFetch("/bookings/" + encodeURIComponent(id), { method: "DELETE" });
@@ -276,6 +282,7 @@
     getBookings,
     addBooking,
     updateBookingStatus,
+    sendBookingMessage,
     deleteBooking,
     getBlocks,
     addBlock,
