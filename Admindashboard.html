@@ -720,6 +720,11 @@
                   <input type="number" id="newSpaceCapacity" min="1" max="200" value="10" required>
                 </div>
 
+                <div class="form-group">
+                  <label>Price label</label>
+                  <input type="text" id="newSpacePriceLabel" placeholder="e.g. From ₦150,000">
+                </div>
+
               </div>
 
               <button type="submit" class="btn-gold" style="width:100%;">
@@ -1160,8 +1165,7 @@
           <div class="space-card-head">
             <div>
               <h3>${escapeHtml(s.name)}</h3>
-              <div class="cap">Up to ${s.capacity} guests</div>
-            </div>
+              <div class="cap">Up to ${s.capacity} guests${s.priceLabel ? " &middot; " + escapeHtml(s.priceLabel) : ""}</div>            </div>
           </div>
           <p class="desc">${escapeHtml(s.description || "No description yet.")}</p>
           <div class="space-card-actions">
@@ -1187,16 +1191,19 @@
       const capacity = prompt("Capacity:", space.capacity);
       if (capacity === null) return;
 
+      const priceLabel = prompt("Price (e.g. 'From ₦150,000' or 'POA'):", space.priceLabel || "");
+      if (priceLabel === null) return;
+
       await MaisonDB.updateSpace(id, {
         name: name.trim() || space.name,
         description: description.trim(),
-        capacity: Number(capacity) || space.capacity
+        capacity: Number(capacity) || space.capacity,
+        priceLabel: priceLabel.trim()
       });
 
       await renderSpacesTab();
       showToast("Space updated.");
     }
-
     async function deleteSpaceConfirm(id) {
       const space = allSpaces.find((s) => s.id === id);
       if (!space) return;
@@ -1214,11 +1221,11 @@
       const name = document.getElementById("newSpaceName").value.trim();
       const description = document.getElementById("newSpaceDesc").value.trim();
       const capacity = document.getElementById("newSpaceCapacity").value;
+      const priceLabel = document.getElementById("newSpacePriceLabel").value.trim();
 
       if (!name) return;
 
-      await MaisonDB.addSpace({ name, description, capacity });
-
+      await MaisonDB.addSpace({ name, description, capacity, priceLabel });
       e.target.reset();
       document.getElementById("newSpaceCapacity").value = 10;
 

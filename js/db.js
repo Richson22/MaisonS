@@ -163,10 +163,10 @@
     return apiFetch("/spaces" + (includeInactive ? "?includeInactive=true" : ""));
   }
 
-  function addSpace({ name, capacity, description }) {
+  function addSpace({ name, capacity, description, priceLabel }) {
     return apiFetch("/spaces", {
       method: "POST",
-      body: JSON.stringify({ name, capacity, description })
+      body: JSON.stringify({ name, capacity, description, priceLabel })
     });
   }
 
