@@ -215,28 +215,55 @@
       <p>Fill in your details to request a booking</p>
 
       <form onsubmit="submitBooking(event)">
-
-        <div class="form-group">
-          <label>Booking Type</label>
-          <select id="selectedEvent" required>
-            <option>Sur Ma Table</option>
-            <option>Privé</option>
-            <option>Sunday Brunch</option>
-            <option>Patio</option>
-          </select>
-        </div>
-
         <div class="form-group">
           <label>Preferred Space</label>
           <select id="selectedSpace" required>
             <option value="">Loading spaces...</option>
           </select>
+          <p style="font-size:11px;color:#8a6a56;margin-top:6px;">
+            NB: All spaces come decorated — simple tablescapes/decor, with dining wares &amp; service team.
+          </p>
+        </div>
+
+        <div class="form-group">
+          <label>Signature Experience</label>
+          <select id="selectedEvent">
+            <option value="">Select an experience</option>
+            <option value="Cocktail & Couture">Cocktail &amp; Couture — up to 10 guests</option>
+            <option value="The Privé Brunch Club">The Privé Brunch Club — 10–25 guests</option>
+            <option value="4 Hands, 1 Table">4 Hands, 1 Table — 10–30 guests</option>
+            <option value="My Own Idea">I have my own idea — describe it below</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Have an idea? Tell Us</label>
+          <textarea id="guestNotes" rows="3" placeholder="Tell us anything else we should know — a theme, dietary needs, a surprise you're planning..." style="width:100%;padding:12px;border:1px solid #e3d4c8;border-radius:7px;outline:none;font-family:inherit;font-size:14px;resize:vertical;"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Number of Guests</label>
+          <input type="number" id="guestCount" min="1" max="30" value="1" required>
+        </div>
+
+        <div class="form-group">
+          <label>Estimated Total</label>
+          <p id="modalPriceDisplay" style="font-size:18px;font-weight:700;color:#BF5700;margin:0;">
+            Select a space and experience
+          </p>
+        </div>
+
+        <div class="form-group">
+          <label>Preferred Date</label>
+          <input type="date" id="modalDate" required>
+          <p class="form-hint" style="margin-top:8px;">Maison S hosts Fridays, Saturdays &amp; Sundays only.</p>
         </div>
 
         <div class="form-group">
           <label>Full Name</label>
           <input type="text" id="guestName" placeholder="Your full name" required>
         </div>
+        
 
         <div class="form-group">
           <label>Email</label>
@@ -248,22 +275,37 @@
           <input type="tel" id="guestPhone" placeholder="+234..." required>
         </div>
 
-        <div class="form-group">
-          <label>Number of Guests</label>
-          <input type="number" id="guestCount" min="1" max="25" value="1" required>
-        </div>
 
-        <div class="form-group">
-          <label>Preferred Date</label>
-          <input type="date" id="modalDate" required>
-        </div>
-
-        <p class="form-hint">Maison S hosts Fridays, Saturdays &amp; Sundays only.</p>
-
-        <button class="btn solid submit" type="submit" id="submitBookingBtn">Request Booking</button>
-
+        <button type="button" class="btn solid submit" id="proceedToPaymentBtn" onclick="proceedToPayment()">Proceed to Make Payment</button>        <button class="btn solid submit" type="submit" id="submitBookingBtn" style="display:none;">Confirm Booking</button>
       </form>
 
+    </div>
+
+  </div>
+
+  <!-- PAYMENT MODAL -->
+  <div class="modal" id="paymentModal">
+    <div class="modal-box">
+      <button class="close" onclick="closePaymentModal()">&times;</button>
+
+      <h2>Make Payment</h2>
+      <p>Transfer <strong id="paymentAmount"></strong>, then upload your proof of payment below.</p>
+
+      <div class="form-group" style="background:#FAF3EC;border-radius:8px;padding:14px;">
+        <p style="font-size:13px;color:#3D2317;line-height:1.6;margin:0;">
+          Bank: UBA<br>
+          Account Name: The Prive Ltd<br>
+          Account Number: <span id="acctNumberText">1027391418</span>
+          <button type="button" onclick="copyAccountNumber()" style="margin-left:8px;border:none;background:#BF5700;color:#fff;padding:3px 10px;border-radius:5px;font-size:11px;font-weight:700;cursor:pointer;">Copy</button>
+        </p>
+      </div>
+
+      <div class="form-group">
+        <label>Proof of Payment</label>
+        <input type="file" id="paymentProof" accept="image/*,.pdf">
+      </div>
+
+      <button type="button" class="btn solid submit" onclick="confirmPaymentUploaded()">Confirm Payment</button>
     </div>
   </div>
 
@@ -293,29 +335,199 @@
   </div>
 
 <script>
+  const DRAFT_KEY = 'maisonSBookingDraft';
+  const DRAFT_FIELDS = ['selectedSpace', 'selectedEvent', 'guestCount', 'modalDate', 'guestName', 'guestEmail', 'guestPhone', 'guestNotes'];
+
+  function saveDraft() {
+    const draft = {};
+    DRAFT_FIELDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) draft[id] = el.value;
+    });
+    localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+  }
+
+  function restoreDraft() {
+    const saved = localStorage.getItem(DRAFT_KEY);
+    if (!saved) return;
+    try {
+      const draft = JSON.parse(saved);
+      DRAFT_FIELDS.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && draft[id]) el.value = draft[id];
+      });
+      updateModalPrice();
+    } catch (e) {}
+  }
+
+  function clearDraft() {
+    localStorage.removeItem(DRAFT_KEY);
+  }
+
   function openBooking() {
     document.getElementById('bookingModal').classList.add('show');
     document.body.style.overflow = 'hidden';
-    populateSpaceOptions();
+    populateSpaceOptions().then(restoreDraft);
+
+    DRAFT_FIELDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener('input', saveDraft);
+    });
   }
 
   function closeBooking() {
     document.getElementById('bookingModal').classList.remove('show');
     document.body.style.overflow = '';
+    document.getElementById('proceedToPaymentBtn').style.display = 'block';
+    document.getElementById('submitBookingBtn').style.display = 'none';
+  }
+
+  function proceedToPayment() {
+    const form = document.querySelector('#bookingModal form');
+    if (!form.reportValidity()) return;
+
+    const amount = document.getElementById('modalPriceDisplay').textContent;
+    document.getElementById('paymentAmount').textContent = amount;
+
+    document.getElementById('bookingModal').classList.remove('show');
+    document.getElementById('paymentModal').classList.add('show');
+  }
+
+  function closePaymentModal() {
+    document.getElementById('paymentModal').classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  function copyAccountNumber() {
+    const number = document.getElementById('acctNumberText').textContent;
+    navigator.clipboard.writeText(number).then(() => {
+      showToast ? showToast('Account number copied.') : alert('Account number copied.');
+    });
+  }
+
+  const CLOUDINARY_CLOUD_NAME = 'wqrybxw3';
+  const CLOUDINARY_UPLOAD_PRESET = 'maison_s_proofs';
+  let uploadedProofUrl = '';
+
+  async function uploadProofToCloudinary(file) {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+
+    const res = await fetch(
+      `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/auto/upload`,
+      { method: 'POST', body: formData }
+    );
+
+    if (!res.ok) {
+      throw new Error('Upload failed. Please try again.');
+    }
+
+    const data = await res.json();
+    return data.secure_url;
+  }
+
+  async function confirmPaymentUploaded() {
+    const proofInput = document.getElementById('paymentProof');
+    if (!proofInput.files.length) {
+      alert('Please upload proof of payment before confirming.');
+      return;
+    }
+
+    const confirmBtn = document.querySelector('#paymentModal .btn.solid');
+    confirmBtn.disabled = true;
+    confirmBtn.textContent = 'Uploading...';
+
+    try {
+      uploadedProofUrl = await uploadProofToCloudinary(proofInput.files[0]);
+
+      document.getElementById('paymentModal').classList.remove('show');
+      document.getElementById('bookingModal').classList.add('show');
+      document.body.style.overflow = 'hidden';
+
+      document.getElementById('proceedToPaymentBtn').style.display = 'none';
+      document.getElementById('submitBookingBtn').style.display = 'block';
+    } catch (err) {
+      alert(err.message);
+    } finally {
+      confirmBtn.disabled = false;
+      confirmBtn.textContent = 'Confirm Payment';
+    }
+  }
+  let spacePriceMap = {};
+
+  function getSpaceFlatPrice(spaceName) {
+    const name = (spaceName || '').toLowerCase();
+    if (name.includes('full house')) return 1000000;
+    if (name.includes('atelier')) return 650000;
+    if (name.includes('patio')) return 350000;
+    return 0;
   }
 
   async function populateSpaceOptions() {
     const select = document.getElementById('selectedSpace');
     try {
       const spaces = await MaisonDB.getSpaces();
-      select.innerHTML = spaces
+      spacePriceMap = {};
+      spaces.forEach(s => { spacePriceMap[s.id] = getSpaceFlatPrice(s.name); });
+      select.innerHTML = '<option value="" selected disabled>Select a space</option>' + spaces
         .map(s => `<option value="${s.id}">${s.name} (up to ${s.capacity} guests)</option>`)
         .join('');
     } catch (err) {
       select.innerHTML = '<option value="">Could not load spaces</option>';
     }
+    updateModalPrice();
+  }
+  const EXPERIENCE_PRICES = {
+    "Cocktail & Couture": { minGuests: 10, maxGuests: 10, minPrice: 450000, maxPrice: 450000 },    "The Privé Brunch Club": { minGuests: 10, maxGuests: 25, minPrice: 550000, maxPrice: 1000000 },
+    "4 Hands, 1 Table": { minGuests: 10, maxGuests: 30, minPrice: 750000, maxPrice: 1450000 }
+  };
+
+  function getExperiencePrice(experienceName, guests) {
+    const exp = EXPERIENCE_PRICES[experienceName];
+    if (!exp) return 0;
+    const g = Math.min(Math.max(guests, exp.minGuests), exp.maxGuests);
+    if (exp.maxGuests === exp.minGuests) return exp.minPrice;
+    const ratio = (g - exp.minGuests) / (exp.maxGuests - exp.minGuests);
+    return Math.round((exp.minPrice + ratio * (exp.maxPrice - exp.minPrice)) / 1000) * 1000;
   }
 
+  function updateModalPrice() {
+    const spaceId = document.getElementById('selectedSpace').value;
+    const experience = document.getElementById('selectedEvent').value;
+    const guests = parseInt(document.getElementById('guestCount').value, 10) || 1;
+
+    const priceEl = document.getElementById('modalPriceDisplay');
+    const submitBtn = document.getElementById('submitBookingBtn');
+    const exp = EXPERIENCE_PRICES[experience];
+
+    if (!spaceId) {
+      priceEl.textContent = 'Select a space and experience';
+      priceEl.style.color = '#BF5700';
+      submitBtn.disabled = false;
+      return;
+    }
+
+    if (exp && (guests < exp.minGuests || guests > exp.maxGuests)) {
+      priceEl.textContent =
+        experience + ' allows for ' + exp.minGuests + ' to ' + exp.maxGuests + ' guests. Please adjust your guest count.';
+      priceEl.style.color = '#b3261e';
+      submitBtn.disabled = true;
+      return;
+    }
+
+    const spacePrice = spacePriceMap[spaceId] || 0;
+    const experiencePrice = getExperiencePrice(experience, guests);
+    const total = spacePrice + experiencePrice;
+
+    priceEl.textContent = '₦' + total.toLocaleString();
+    priceEl.style.color = '#BF5700';
+    submitBtn.disabled = false;
+  }
+
+  document.getElementById('selectedSpace').addEventListener('change', updateModalPrice);
+  document.getElementById('selectedEvent').addEventListener('change', updateModalPrice);
+  document.getElementById('guestCount').addEventListener('input', updateModalPrice);
     function openAbout() {
     document.getElementById('aboutModal').classList.add('show');
     document.body.style.overflow = 'hidden';
@@ -348,6 +560,7 @@
     const phone = document.getElementById('guestPhone').value;
     const guests = document.getElementById('guestCount').value;
     const date = document.getElementById('modalDate').value;
+    const notes = document.getElementById('guestNotes').value;
 
     if (!MaisonDB.isHostableDay(date)) {
       alert('Maison S hosts Fridays, Saturdays & Sundays only. Please choose one of those days.');
@@ -365,7 +578,9 @@
         return;
       }
 
-      await MaisonDB.addBooking({ type, name, email, phone, guests, date, spaceId });      closeBooking();
+      await MaisonDB.addBooking({ type, name, email, phone, guests, date, spaceId, proofOfPaymentUrl: uploadedProofUrl, notes });
+      clearDraft();
+      closeBooking();
       e.target.reset();
       alert("Thanks — we'll be in touch shortly.");
     } catch (err) {

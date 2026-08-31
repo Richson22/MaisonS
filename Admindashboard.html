@@ -1008,10 +1008,19 @@
               <td>${b.date || "-"}</td>
               <td>${b.guests || "-"}</td>
               <td><span class="badge ${b.status}">${b.status}</span></td>
+              <td>${
+                b.proofOfPaymentUrl
+                  ? `<a href="${b.proofOfPaymentUrl}" target="_blank" style="color:#1c7c3e;font-weight:700;">&#10003; Paid</a>`
+                  : `<span style="color:#b3261e;">Unpaid</span>`
+              }</td>
+              <td>${
+                b.notes
+                  ? `<span style="color:#b78c37;font-weight:700;" title="${escapeHtml(b.notes)}">&#128172; Has idea</span>`
+                  : `<span style="color:#bbb;">—</span>`
+              }</td>
               <td>
                 <div class="row-actions">
-                  <button class="mini-btn view" onclick="openDetail('${b.id}')">View</button>
-                  ${
+                  <button class="mini-btn view" onclick="openDetail('${b.id}')">View</button>                  ${
                     b.status === "pending"
                       ? `<button class="mini-btn confirm" onclick="setStatus('${b.id}','confirmed')">Confirm</button>
                          <button class="mini-btn decline" onclick="setStatus('${b.id}','declined')">Decline</button>`
@@ -1034,6 +1043,8 @@
               <th>Date</th>
               <th>Guests</th>
               <th>Status</th>
+              <th>Payment</th>
+              <th>Idea/Notes</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -1066,6 +1077,16 @@
         <div class="detail-row"><span>Phone</span><span>${escapeHtml(b.phone)}</span></div>
         <div class="detail-row"><span>Guests</span><span>${b.guests}</span></div>
         <div class="detail-row"><span>Date</span><span>${b.date}</span></div>
+        <div class="detail-row"><span>Proof of Payment</span><span>${
+          b.proofOfPaymentUrl
+            ? `<a href="${b.proofOfPaymentUrl}" target="_blank" style="color:#b78c37;font-weight:700;">View receipt &#8599;</a>`
+            : "Not uploaded"
+        }</span></div>
+        ${
+          b.notes
+            ? `<div class="detail-row" style="display:block;"><span style="display:block;margin-bottom:6px;">Guest Notes / Ideas</span><span style="display:block;text-align:left;font-weight:400;white-space:pre-wrap;">${escapeHtml(b.notes)}</span></div>`
+            : ""
+        }
         <div class="detail-row"><span>Submitted</span><span>${new Date(b.createdAt).toLocaleString()}</span></div>
       `;
 
@@ -1088,6 +1109,10 @@
       const b = allBookings.find((x) => x.id === id);
       if (!b) return;
 
+      const prefill = b.notes
+        ? `Hi ${b.name || "there"},\n\nRegarding your note: "${b.notes}"\n\n`
+        : `Hi ${b.name || "there"},\n\n`;
+
       document.getElementById("detailBody").innerHTML = `
         <p style="font-size:12px;color:#999;margin-bottom:14px;">Sending to <strong>${escapeHtml(b.email)}</strong></p>
         <div class="form-group">
@@ -1096,7 +1121,7 @@
         </div>
         <div class="form-group">
           <label>Message</label>
-          <textarea id="msgBody" rows="6" placeholder="Write your message..."></textarea>
+          <textarea id="msgBody" rows="6" placeholder="Write your message...">${escapeHtml(prefill)}</textarea>
         </div>
       `;
 
@@ -1364,31 +1389,30 @@
     // ------------------------------------------------------
 
     const CONTENT_FIELDS = [
-      { key: "hero.title",        label: "Hero — Title",              type: "text" },
-      { key: "hero.sub",          label: "Hero — Subtitle",           type: "text" },
-      { key: "hero.lede",         label: "Hero — Lede line",          type: "text" },
+      { key: "hero.title",        label: "Homepage Banner — Main Title (top of page)",         type: "text" },
+      { key: "hero.sub",          label: "Homepage Banner — Small Subtitle",                    type: "text" },
+      { key: "hero.lede",         label: "Homepage Banner — Short Welcome Line",                type: "text" },
 
-      { key: "about.eyebrow",     label: "The House — Label",         type: "text" },
-      { key: "about.heading",     label: "The House — Heading",       type: "text" },
-      { key: "about.tagline",     label: "The House — Tagline",       type: "text" },
-      { key: "about.body",        label: "The House — Body text",     type: "textarea" },
+      { key: "about.eyebrow",     label: "\"The House\" Section — Small Tag Above the Title",   type: "text" },
+      { key: "about.heading",     label: "\"The House\" Section — Main Title",                  type: "text" },
+      { key: "about.tagline",     label: "\"The House\" Section — Short Line Under the Title",  type: "text" },
+      { key: "about.body",        label: "\"The House\" Section — Paragraph Text",              type: "textarea" },
 
-      { key: "experiences.eyebrow", label: "Experiences — Label",     type: "text" },
-      { key: "experiences.heading", label: "Experiences — Heading",   type: "text" },
-      { key: "experiences.body",    label: "Experiences — Body text", type: "textarea" },
+      { key: "experiences.eyebrow", label: "\"Experiences\" Section — Small Tag Above the Title", type: "text" },
+      { key: "experiences.heading", label: "\"Experiences\" Section — Main Title",                type: "text" },
+      { key: "experiences.body",    label: "\"Experiences\" Section — Paragraph Text",            type: "textarea" },
 
-      { key: "residents.eyebrow",   label: "Residents — Label",       type: "text" },
-      { key: "residents.heading",   label: "Residents — Heading",     type: "text" },
-      { key: "residents.body",      label: "Residents — Body text",   type: "textarea" },
+      { key: "residents.eyebrow",   label: "\"Residents\" Section — Small Tag Above the Title",  type: "text" },
+      { key: "residents.heading",   label: "\"Residents\" Section — Main Title",                 type: "text" },
+      { key: "residents.body",      label: "\"Residents\" Section — Paragraph Text",             type: "textarea" },
 
-      { key: "cta.heading",       label: "CTA — Heading",             type: "text" },
-      { key: "cta.body",          label: "CTA — Body text",           type: "textarea" },
+      { key: "cta.heading",       label: "Bottom Call-to-Action — Main Title",                   type: "text" },
+      { key: "cta.body",          label: "Bottom Call-to-Action — Paragraph Text",               type: "textarea" },
 
-      { key: "aboutModal.eyebrow", label: "About Modal — Label",       type: "text" },
-      { key: "aboutModal.heading", label: "About Modal — Heading",     type: "text" },
-      { key: "aboutModal.body",    label: "About Modal — Body (HTML ok)", type: "textarea" }
+      { key: "aboutModal.eyebrow", label: "\"About Us\" Popup — Small Tag Above the Title",      type: "text" },
+      { key: "aboutModal.heading", label: "\"About Us\" Popup — Main Title",                     type: "text" },
+      { key: "aboutModal.body",    label: "\"About Us\" Popup — Full Paragraph Text",            type: "textarea" }
     ];
-
     let contentValues = {};
 
     async function renderContentTab() {
