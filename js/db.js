@@ -190,10 +190,10 @@
     return apiFetch("/bookings");
   }
 
-  function addBooking({ type, name, email, phone, guests, date, spaceId, notes }) {
+  function addBooking({ type, name, email, phone, guests, date, spaceId, notes, proofOfPaymentUrl }) {
     return apiFetch("/bookings", {
       method: "POST",
-      body: JSON.stringify({ type, name, email, phone, guests, date, spaceId, notes })
+      body: JSON.stringify({ type, name, email, phone, guests, date, spaceId, notes, proofOfPaymentUrl })
     });
   }
 

@@ -12,6 +12,8 @@
   rel="stylesheet"
 >
 
+<link rel="stylesheet" href="css/admin.css">
+
 <style>
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -543,6 +545,19 @@
     table { display: block; overflow-x: auto; white-space: nowrap; }
   }
 
+ .logo{
+    font-family:'Fraunces', serif;
+    font-size:16px;
+    font-weight:600;
+    letter-spacing:0.16em;
+  }
+
+  .nav-logo{
+    display:block;
+    height:26px;
+    width:auto;
+    filter:invert(1) brightness(1.6);
+  }
 </style>
 </head>
 <body>
@@ -589,7 +604,7 @@
       <div class="topbar-inner">
 
         <div class="brandmark">
-          MAISON <span>S</span>
+           <img src="images/maison-s-logo.png" alt="Maison S — The Culinary Atelier" class="nav-logo">
           <small>Admin Dashboard</small>
         </div>
 
@@ -1389,28 +1404,28 @@
     // ------------------------------------------------------
 
     const CONTENT_FIELDS = [
-      { key: "hero.title",        label: "Homepage Banner — Main Title (top of page)",         type: "text" },
-      { key: "hero.sub",          label: "Homepage Banner — Small Subtitle",                    type: "text" },
+      // { key: "hero.title",        label: "Homepage Banner — Main Title (top of page)",         type: "text" },
+      // { key: "hero.sub",          label: "Homepage Banner — Small Subtitle",                    type: "text" },
       { key: "hero.lede",         label: "Homepage Banner — Short Welcome Line",                type: "text" },
 
-      { key: "about.eyebrow",     label: "\"The House\" Section — Small Tag Above the Title",   type: "text" },
-      { key: "about.heading",     label: "\"The House\" Section — Main Title",                  type: "text" },
+      { key: "about.eyebrow",     label: "\"The House\" Section — Main Title",   type: "text" },
+      { key: "about.heading",     label: "\"The House\" Section — Small Tag Above the Title",                  type: "text" },
       { key: "about.tagline",     label: "\"The House\" Section — Short Line Under the Title",  type: "text" },
       { key: "about.body",        label: "\"The House\" Section — Paragraph Text",              type: "textarea" },
 
-      { key: "experiences.eyebrow", label: "\"Experiences\" Section — Small Tag Above the Title", type: "text" },
-      { key: "experiences.heading", label: "\"Experiences\" Section — Main Title",                type: "text" },
+      { key: "experiences.eyebrow", label: "\"Experiences\" Section — Main Title", type: "text" },
+      { key: "experiences.heading", label: "\"Experiences\" Section — Small Tag Above the Title",                type: "text" },
       { key: "experiences.body",    label: "\"Experiences\" Section — Paragraph Text",            type: "textarea" },
 
-      { key: "residents.eyebrow",   label: "\"Residents\" Section — Small Tag Above the Title",  type: "text" },
-      { key: "residents.heading",   label: "\"Residents\" Section — Main Title",                 type: "text" },
+      { key: "residents.eyebrow",   label: "\"Residents\" Section — Main Title",  type: "text" },
+      { key: "residents.heading",   label: "\"Residents\" Section — Small Tag Above the Title",                 type: "text" },
       { key: "residents.body",      label: "\"Residents\" Section — Paragraph Text",             type: "textarea" },
 
       { key: "cta.heading",       label: "Bottom Call-to-Action — Main Title",                   type: "text" },
       { key: "cta.body",          label: "Bottom Call-to-Action — Paragraph Text",               type: "textarea" },
 
-      { key: "aboutModal.eyebrow", label: "\"About Us\" Popup — Small Tag Above the Title",      type: "text" },
-      { key: "aboutModal.heading", label: "\"About Us\" Popup — Main Title",                     type: "text" },
+      { key: "aboutModal.eyebrow", label: "\"About Us\" Popup — Popup — Main Title",      type: "text" },
+      { key: "aboutModal.heading", label: "\"About Us\" Popup — Small Tag Above the Title",                     type: "text" },
       { key: "aboutModal.body",    label: "\"About Us\" Popup — Full Paragraph Text",            type: "textarea" }
     ];
     let contentValues = {};
